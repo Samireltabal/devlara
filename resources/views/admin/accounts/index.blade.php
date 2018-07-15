@@ -65,16 +65,8 @@
                       
 
                        
-                      <a href="#" class="btn btn-warning btn-xs" title="Edit"><i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i> Edit</a>
-                        
-
-                        <form style="display:inline;" action="{{ route('deleteAccount') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="user_id" value="{{ $user->id }}">  
-                            <input type="hidden" name="_method" value='delete'>
-                            <button type='submit' class="btn btn-danger btn-xs" title="Remove"><i class="fa fa-remove fa-lg" aria-hidden="true"></i> Remove</button>
-                          </form>
-                      
+                    <a href="{{ route('accounts.edit',$user->id) }}" class="btn btn-warning btn-xs" title="Edit"><i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i> Edit</a>
+                      <a id="{{ $user->id }}"  onclick="confirmDelete('{{ $user->id }}');" link="{{ route('deleteAccount') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                     </td>
                   </tr>
               @endforeach

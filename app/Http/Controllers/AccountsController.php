@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Response;
+use Auth;
+use Hash;
 use Illuminate\Support\Facades\Route;
 
 
@@ -54,17 +57,59 @@ class AccountsController extends Controller
 		return $role_id;
 
 	}
-	public function update(Request $request) {
-		
+	public function Edit($id) {
+		$user = User::find($id);
+		$roles = Role::all();
+
+		return view('admin.accounts.edit')->with(compact('roles','user'));
+
 	}
-	public function suspend(Request $request) {
-		
+	public function profile() {
+		$user = User::find(Auth::user()->id);
+		return view('admin.accounts.profile')->with(compact('user'));
+
+	}
+	public function update(Request $request,$id) {
+		$this->validate($request, [
+			'name' => 'required|string|min:8|max:255',
+			'email' => "required|email|max:255|unique:users,email,$id",
+		]);
+		$active_stat = $request->active = 'on' ? '1' : '0' ; 
+		$user = User::find($id);
+		$user->name = $request->input('name');
+		$user->email = $request->input('email');
+		$user->active = $active_stat;
+		$user->save();
+		$user->roles()->detach();
+		$user->roles()->attach($request->input('role'));
+		$user->save();
+		return back();
+
+	}
+	public function changePassword(Request $request) {
+		$this->validate($request, [
+				'oldPassword' => 'required',
+				//'password' => 'required|min:8|confirmed',
+			]);
+			$old_password = $request->input('oldPassword');
+			$newpassword = $request->input('password');
+			$user = User::find(Auth::user()->id);
+			$hashedPassword = $user->password;
+			if (Hash::check($old_password, $hashedPassword)) {
+				$user->password = bcrypt($newpassword);
+				$user->save();
+				return back()->with('success','Password Changed Successfully');
+			}else{
+				return back()->with('faild','Old Password Is Wrong');
+			}
+
 	}
 	public function delete(Request $request) {
+		
 		$user_id = $request->input('user_id');
 		$user = User::find($user_id);
 		$user->roles()->detach();
 		$user->delete();
-		return back();
+		return response('true',200);
 	}
 }

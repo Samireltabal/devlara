@@ -35,7 +35,7 @@
         <li class="header">{{ __("Members Area") }}</li>
         <!-- Optionally, you can add icons to the links -->
         <!--Members Area-->
-        <li><a href="#"><i class="fa fa-link"></i> <span>{{ __("Profile")}}</span></a></li>
+      <li id="accountsedit{{Auth::user()->id}}"><a href="{{ route('accounts.profile',Auth::user()->id) }}"><i class="fa fa-user"></i> <span>{{ __("Profile")}}</span></a></li>
         <li><a href="#"><i class="fa fa-shopping-cart"></i> <span>{{ __("Sales")}}</span></a></li>
         <li><a href="#"><i class="fa fa-money"></i> <span>{{ __("My Salary")}}</span></a></li>
         @if(Auth::user()->hasRole('admin'))

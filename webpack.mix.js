@@ -17,6 +17,8 @@ mix.combine([
              'resources/assets/admin/bower_components/bootstrap/dist/js/bootstrap.min.js',
              'resources/assets/admin/dist/js/adminlte.min.js',
              'resources/assets/admin/plugins/iCheck/icheck.min.js',
+             'node_modules/sweetalert2/dist/sweetalert2.all.min.js',
+
              ],'public/admin/app.js');
 mix.styles([
          'resources/assets/admin/bower_components/bootstrap/dist/css/bootstrap.min.css',

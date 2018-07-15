@@ -6,7 +6,7 @@
 @include('admin.main.head')
 <script src="{{ asset('admin/app.js') }}"></script>
 
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition skin-green fixed sidebar-mini ">
 <div class="wrapper">
 
   <!-- Main Header -->

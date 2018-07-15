@@ -35,6 +35,14 @@ Route::get('/dashboard', 'AdminController@index')->name('admin');
                 Route::delete('/delete','AccountsController@delete')->name('deleteAccount');
             });
             Route::get('/','AccountsController@index')->name('accounts.list');
+            Route::get('/edit/{id}','AccountsController@Edit')->name('accounts.edit');
+            Route::get('/profile','AccountsController@profile')->name('accounts.profile');
+
+            Route::put('/edit/{id}','AccountsController@update')->name('accounts.update');
+            Route::put('/password','AccountsController@changePassword')->name('accounts.password');
+
+
+
             Route::get('/create','AccountsController@create')->name('accounts.create');
             Route::post('/addUser','AccountsController@doAdd')->name('accounts.createAdd');
 
