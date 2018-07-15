@@ -8,4 +8,5 @@
 		'signIn' => 'Sign In',
 		'password' => 'Password... ',
 		'email' => 'Email Address',
+		'lockedAccount' => 'Your account is locked please contact administrator',
 	];

@@ -15,7 +15,13 @@
 </div>
 <!-- ./wrapper -->
  
-<script src="{{ asset('admin/app.js') }}"></script>
+<script>
+      var menuId = '#{{  str_slug(Route::getFacadeRoot()->current()->getName()) }}';
+    var li = $(menuId).closest(".treeview");
 
+    $(menuId).addClass('active');
+    $(li).addClass('active');
+
+</script>
 </body>
 </html>

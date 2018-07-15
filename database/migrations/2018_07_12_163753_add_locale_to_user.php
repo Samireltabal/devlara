@@ -14,7 +14,7 @@ class AddLocaleToUser extends Migration
     public function up()
     {
         Schema::table('users', function($table) {
-        $table->string('locale',2);
+        $table->string('locale',2)->nullable();
     });
     }
 

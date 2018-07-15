@@ -7,7 +7,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{ Auth::user()->name }}</p>
@@ -30,6 +30,8 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
+        <li id='dashboard'><a href="{{ route('dashboard') }}"><i class="fa fa-home"></i> <span>{{ __("Home")}}</span></a></li>
+
         <li class="header">{{ __("Members Area") }}</li>
         <!-- Optionally, you can add icons to the links -->
         <!--Members Area-->
@@ -61,8 +63,8 @@
               </span>
                 </a>
           <ul class="treeview-menu">  
-            <li><a href="#">{{__("Create Account")}}</a></li>
-            <li><a href="{{ route('accounts.list') }}">{{__("List Accounts")}}</a></li>
+            <li id='accountscreate'><a href="{{ route('accounts.create')}}">{{__("Create Account")}}</a></li>
+            <li id='accountslist'><a href="{{ route('accounts.list') }}">{{__("List Accounts")}}</a></li>
           </ul>
         </li>
           
@@ -104,3 +106,12 @@
     </section>
     <!-- /.sidebar -->
   </aside>
+  
+
+
+<script>
+$(document).ready(function($){
+    var url = window.location.href;
+    $('.nav li a[href="'+url+'"]').addClass('active');
+});
+</script>

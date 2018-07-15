@@ -13,7 +13,12 @@
 	function global_locale() {
 		$option = new Options;
 		$locale = $option::where('key','locale')->first();
-		return $locale->value;
+		if($locale){
+			return $locale->value;	
+		}else{
+			return config('app.locale', 'en');
+		}
+		
 	}
 	function get_option($key = null) {
 		 if ($key) {
@@ -32,4 +37,14 @@
 			return "you must supply key to get_option() function";
 		}
 	}
+	function active_class_path($paths, $classes = null)
+{
+    foreach ((array) $paths as $path) {
+        if (request()->is($path)) {
+            return 'class="' . ($classes ? $classes . ' ' : '') . 'active"';
+        }
+    }
+    return $classes ? 'class="' . $classes . '"' : '';
+}
+
 ?>

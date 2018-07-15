@@ -18,7 +18,7 @@ class isActive
         if(Auth::check()) {
             if(Auth::user()->active !== 1){
             Auth::logout();
-            return redirect()->route('login')->with('Error',"Your account is locked please contact administrator");
+            return redirect()->route('login')->with('Error',__('custom.lockedAccount'));
             }
         }
         return $next($request);

@@ -12,7 +12,7 @@
 */
 
 // Main Route ( Home Page )
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('dashboard');
 
 // Authentication Routes 
 Auth::routes();
@@ -25,6 +25,18 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/dashboard', 'AdminController@index')->name('admin');
 
-// Accounts Routes
 
-Route::get('dashboard/accounts','AccountsController@index')->name('accounts.list');
+// Super Admin Area
+    // Accounts
+        Route::group(['prefix' => 'accounts', 'middleware' => ['auth','role:admin']], function() {
+            // Prevent User From Deleting Or Suspending His Account
+            Route::group(['middleware'=>'SecureYourSelf'], function() {
+                Route::post('/toggle','AccountsController@toggle')->name('toggleState');
+                Route::delete('/delete','AccountsController@delete')->name('deleteAccount');
+            });
+            Route::get('/','AccountsController@index')->name('accounts.list');
+            Route::get('/create','AccountsController@create')->name('accounts.create');
+            Route::post('/addUser','AccountsController@doAdd')->name('accounts.createAdd');
+
+        
+            });

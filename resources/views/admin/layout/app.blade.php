@@ -5,11 +5,9 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Page Header
-        <small>{{ get_locale() }}</small> <br>
-        <small>{{ get_option('direction') }}</small>
+          @yield('title')
       </h1>
-      <ol class="breadcrumb">
+      <ol class="breadcrumb hide">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li class="active">Here</li>
       </ol>
@@ -21,10 +19,10 @@
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
+        @yield('content')
 
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
  @include('admin.layout.footer')

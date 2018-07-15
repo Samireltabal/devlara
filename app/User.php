@@ -62,6 +62,10 @@ class User extends Authenticatable
     }
     return false;
     }
+    public function toggle() {
+        $this->active = !$this->active ;
+        return $this;
+    }
     
 
 }
