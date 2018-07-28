@@ -1,22 +1,24 @@
 @extends('admin.layout.app')
-
+<?php 
+$locale = get_locale();
+  		App::setLocale($locale);
+?>
 @section('title')
-  Edit Account
+  {{__("Edit Profile")}}
 @endsection
 
 
 @section('content')
-
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">{{ __("Edit Account")}} {{__("For")}} {{ $user->name }}</h3>
+                <h3 class="box-title">{{ __("Edit Your Profile")}}</h3>
             </div>  
-            <form action="{{ route("accounts.update",$user->id) }}" method="POST" >
+            <form action="{{ route("accounts.editProfile") }}" method="POST" >
             @csrf
             <input type="hidden" name="_method" value="put" >
               <div class="box-body">
                 <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }} col-lg-12">
-                    <label for="name">{{ __("Name") }} :</label>
+                    <label for="name">{{ __("Name") }} </label>
                     <input type="text" name="name" id="name" class="form-control" placeholder="{{ __("Name") }}" value="{{ $user->name }}" aria-describedby="helpId">
                     @if($errors->has('name'))
                     <span class="invalid-feedback" role="alert">
@@ -48,7 +50,7 @@
         </div>
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">{{ __("Edit Password")}}</h3>
+                <h3 class="box-title">{{ __("Edit Password") }}</h3>
             </div>
             <div class="box-body">
                 <hr>
@@ -57,7 +59,7 @@
                 @csrf
             <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }} col-lg-12">
                 <label for="oldPassword">{{ __("Old Password") }}</label>
-            <input type="password"class='form-control' name="oldPassword" id="oldPassword" placeholder="{{ __("Password") }}" />
+            <input type="password"class='form-control' name="oldPassword" id="oldPassword" placeholder="{{ __("Old Password") }}" />
                 @if($errors->has('password'))
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $errors->first('password') }}</strong>
@@ -66,7 +68,7 @@
             </div>
             <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }} col-lg-6">
                 <label for="password">{{ __("New Password") }}</label>
-                <input type="password"class='form-control' name="password" id="password" placeholder="{{ __("Password") }}"/>
+                <input type="password"class='form-control' name="password" id="password" placeholder="{{ __("New Password") }}"/>
                 @if($errors->has('password'))
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $errors->first('password') }}</strong>
@@ -75,7 +77,7 @@
             </div>
             <div class="form-group {{ $errors->has('passwordConfirmation') ? ' has-error' : '' }} col-lg-6">
                     <label for="password_confirmation">{{ __("New Password Confirmation") }}</label>
-                    <input type="password"class='form-control' name="password_confirmation" id="password_confirmation" placeholder="{{ __("Password Confirmation") }}"/>
+                    <input type="password"class='form-control' name="password_confirmation" id="password_confirmation" placeholder="{{ __("New Password Confirmation") }}"/>
                     @if($errors->has('password_confirmation'))
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $errors->first('password_confirmation') }}</strong>

@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="{{ asset('admin/app-rtl.css') }}" />
   <link href="https://fonts.googleapis.com/css?family=Cairo:400,700&amp;subset=arabic" rel="stylesheet">
   <style>
-    p , a , h1 , h2 , h3 , h4 , h5 , h6 , input , label , ul , li , button{
+    p , a , h1 , h2 , h3 , h4 , h5 , h6 , input , label , ul , li , button, table{
       font-family: 'Cairo', sans-serif ;
     }
   </style>

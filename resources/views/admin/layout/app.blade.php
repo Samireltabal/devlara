@@ -1,6 +1,10 @@
 @include('admin.layout.header')
 @include('admin.layout.sidebar')
-  <!-- Content Wrapper. Contains page content -->
+<?php 
+$locale = get_locale();
+  		App::setLocale($locale);
+?>
+<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -19,6 +23,7 @@
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
+        
         @yield('content')
 
     </section>

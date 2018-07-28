@@ -1,5 +1,8 @@
 <?php
 	use App\Options;
+	use App\Shifts;
+	use Carbon\Carbon;
+	use App\Categories;
 	
 	function get_locale(){
 		if (Auth::check()){
@@ -37,14 +40,34 @@
 			return "you must supply key to get_option() function";
 		}
 	}
-	function active_class_path($paths, $classes = null)
-{
-    foreach ((array) $paths as $path) {
-        if (request()->is($path)) {
-            return 'class="' . ($classes ? $classes . ' ' : '') . 'active"';
-        }
-    }
-    return $classes ? 'class="' . $classes . '"' : '';
-}
-
+	function get_shift() {
+		$shifts = Shifts::where('active',1)->limit(1)->get();
+		return $shifts[0]->id;
+	}
+	function get_current_shift_date() {
+		$shifts = Shifts::where('active',1)->limit(1)->get();
+		return $shifts[0]->created_at;
+	}
+	function check_shift() {
+		$time = Carbon::today()->Format('Y-m-d');
+		$shifts = Shifts::where('active',1)->limit(1)->get();
+		$shift_time = $shifts[0]->created_at;
+		if($time != $shift_time) {
+			return False;
+		}else{
+			return true;
+		}
+		
+	}
+	function category_name($id) {
+		$category = Categories::find($id);
+		return $category->cat_name;
+	}
+	function get_status($status) {
+		if($status){
+			return '<span class="label label-success">' . __("Active"). '</span>';
+		}else{
+			return '<span class="label label-danger">' . __("Inactive"). '</span>';
+		}
+	}
 ?>

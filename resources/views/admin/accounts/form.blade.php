@@ -1,7 +1,10 @@
 @extends('admin.layout.app')
-
+<?php
+$locale = get_locale();
+  App::setLocale($locale);
+?>
 @section('title')
-  Create Account
+  {{__("Create Account")}}
 @endsection
 
 
@@ -84,15 +87,4 @@
         </div>
         </form>
         </div>
-        
-      
-        <script>
-                $(function () {
-                  $('input').iCheck({
-                    checkboxClass: 'icheckbox_square-green',
-                    radioClass: 'iradio_square-green',
-                    increaseArea: '20%' /* optional */
-                  });
-                });
-              </script>
 @endsection

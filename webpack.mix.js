@@ -17,7 +17,13 @@ mix.combine([
              'resources/assets/admin/bower_components/bootstrap/dist/js/bootstrap.min.js',
              'resources/assets/admin/dist/js/adminlte.min.js',
              'resources/assets/admin/plugins/iCheck/icheck.min.js',
+             'resources/assets/admin/bower_components/chart.js/chart.min.js',
              'node_modules/sweetalert2/dist/sweetalert2.all.min.js',
+             'node_modules/izitoast/dist/js/iziToast.min.js',
+             'node_modules/jsbarcode/dist/barcodes/JsBarcode.code128.min.js',
+             'node_modules/jquery-ui-dist/jquery-ui.js',
+             'resources/assets/js/custom.js',
+
 
              ],'public/admin/app.js');
 mix.styles([
@@ -27,6 +33,12 @@ mix.styles([
          'resources/assets/admin/dist/css/AdminLTE.min.css',
          'resources/assets/admin/plugins/iCheck/square/green.css',
          'resources/assets/admin/dist/css/skins/skin-green.min.css',
+         'node_modules/jquery-ui-dist/jquery-ui.css',
+         'node_modules/jquery-ui-dist/jquery-ui.structure.min.css',
+         'node_modules/jquery-ui-dist/jquery-ui.theme.min.css',
+         'node_modules/izitoast/dist/css/iziToast.min.css',
+         'resources/assets/css/custom.css',
+
            ],'public/admin/app.css');
 
 mix.styles([
@@ -38,5 +50,10 @@ mix.styles([
          'resources/assets/rtl/rtl.css',
          'resources/assets/rtl/profile.css',
          'resources/assets/admin/plugins/iCheck/square/green.css',
+         'node_modules/izitoast/dist/css/iziToast.min.css',
+         'node_modules/jquery-ui-dist/jquery-ui.css',
+         'node_modules/jquery-ui-dist/jquery-ui.structure.min.css',
+         'node_modules/jquery-ui-dist/jquery-ui.theme.min.css',
          'resources/assets/rtl/skin-green.min.css',
+         'resources/assets/css/custom.css',
                       ],'public/admin/app-rtl.css');

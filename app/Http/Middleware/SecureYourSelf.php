@@ -23,6 +23,6 @@ class SecureYourSelf
                 return $next($request);
             } // They're the owner, lets continue...
 
-            return back()->with('Error','You are not allowed to do this action'); // Nope! Get outta' here.
+            return back()->with('faild','You are not allowed to do this action'); // Nope! Get outta' here.
         }
 }

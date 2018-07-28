@@ -1,5 +1,8 @@
 @extends('admin.layout.app')
-
+<?php
+$locale = get_locale();
+  App::setLocale($locale);
+?>
 @section('title')
   Edit Account
 @endsection

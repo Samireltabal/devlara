@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <!-- search form (Optional) -->
+      {{-- <!-- search form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
@@ -26,7 +26,7 @@
             </span>
         </div>
       </form>
-      <!-- /.search form -->
+      <!-- /.search form --> --}}
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
@@ -35,8 +35,8 @@
         <li class="header">{{ __("Members Area") }}</li>
         <!-- Optionally, you can add icons to the links -->
         <!--Members Area-->
-      <li id="accountsedit{{Auth::user()->id}}"><a href="{{ route('accounts.profile',Auth::user()->id) }}"><i class="fa fa-user"></i> <span>{{ __("Profile")}}</span></a></li>
-        <li><a href="#"><i class="fa fa-shopping-cart"></i> <span>{{ __("Sales")}}</span></a></li>
+      <li id="accountsprofile"><a href="{{ route('accounts.profile') }}"><i class="fa fa-user"></i> <span>{{ __("Profile")}}</span></a></li>
+        <li id='salesmain'><a href="{{route('sales.main')}}"><i class="fa fa-shopping-cart"></i> <span>{{ __("Sales")}}</span></a></li>
         <li><a href="#"><i class="fa fa-money"></i> <span>{{ __("My Salary")}}</span></a></li>
         @if(Auth::user()->hasRole('admin'))
         <!--Admins Area-->
@@ -49,8 +49,13 @@
               </span>
           </a>
           <ul class="treeview-menu">  
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li id='shiftsmain'><a href="{{route('shifts.main')}}">{{__("Shifts")}}</a></li>
+            <li id='suppliersmain'><a href="{{route('suppliers.main')}}">{{__("Suppliers")}}</a></li>
+            <li id='categoriesmain'><a href="{{route('categories.main')}}">{{__("Categories")}}</a></li>
+            <li id='productsmain'><a href="{{route('products.main')}}">{{__("Products")}}</a></li>
+            <li id='inventorymain'><a href="{{route('inventory.main')}}">{{__("Inventory")}}</a></li>
+            
+
           </ul>
         </li>
         <li class='treeview'>
@@ -109,9 +114,4 @@
   
 
 
-<script>
-$(document).ready(function($){
-    var url = window.location.href;
-    $('.nav li a[href="'+url+'"]').addClass('active');
-});
-</script>
+

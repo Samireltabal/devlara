@@ -5,10 +5,18 @@
 ?>
 @include('admin.main.head')
 <script src="{{ asset('admin/app.js') }}"></script>
+<style>
+  .ui-autocomplete {
+    background:#eee;
+  }
+ .ui-menu-item-wrapper , .ui-autocomplete li  {
+    padding:0.4em;
+  }
+</style>
 
-<body class="hold-transition skin-green fixed sidebar-mini ">
+<body class="hold-transition skin-green  sidebar-mini">
 <div class="wrapper">
-
+<div class="loader" id="loading"></div>
   <!-- Main Header -->
   <header class="main-header">
 
@@ -66,7 +74,7 @@
           <!-- /.messages-menu -->
 
           <!-- Notifications Menu -->
-          <li class="dropdown notifications-menu">
+          <li class="dropdown notifications-menu hidden-xs">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
@@ -89,7 +97,7 @@
             </ul>
           </li>
           <!-- Tasks Menu -->
-          <li class="dropdown tasks-menu">
+          <li class="dropdown tasks-menu  hidden-xs">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-flag-o"></i>

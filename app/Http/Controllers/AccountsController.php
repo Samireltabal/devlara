@@ -9,17 +9,23 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Response;
 use Auth;
 use Hash;
+use App;
 use Illuminate\Support\Facades\Route;
 
 
 class AccountsController extends Controller
 {
-    //
-	public function __construct() {
-		
+	//
+	public function __construct(){
+		$locale = get_locale();
+		App::setLocale($locale);
+		$this->middleware('auth');
+        $this->middleware('isActive');
 	}
 	public function index() {
 		$users = User::paginate(10);
+		$locale = get_locale();
+  		App::setLocale($locale);
 		return view('admin.accounts.index')->with('users',$users);
 	}
 	public function toggle(Request $request) {
@@ -60,7 +66,8 @@ class AccountsController extends Controller
 	public function Edit($id) {
 		$user = User::find($id);
 		$roles = Role::all();
-
+		$locale = get_locale();
+  App::setLocale($locale);
 		return view('admin.accounts.edit')->with(compact('roles','user'));
 
 	}
@@ -69,22 +76,39 @@ class AccountsController extends Controller
 		return view('admin.accounts.profile')->with(compact('user'));
 
 	}
+	public function editProfile(Request $request){
+		$id = Auth::user()->id;
+		$this->validate($request, [
+			'name' => 'required|string|min:8|max:255',
+			'email' => "required|email|max:255|unique:users,email,$id",
+		]);
+		
+		$user = User::find($id);
+		$user->name = $request->input('name');
+		$user->email = $request->input('email');
+		$user->save();
+		return back()->with('success','Profile Updated Successfully');
+	}
 	public function update(Request $request,$id) {
 		$this->validate($request, [
 			'name' => 'required|string|min:8|max:255',
 			'email' => "required|email|max:255|unique:users,email,$id",
 		]);
-		$active_stat = $request->active = 'on' ? '1' : '0' ; 
+		if ($request->input('active')) {
+			$active_stat = 1;
+		}else{
+			$active_stat = 0;
+		}
+		// $active = $request->input('active');
+		// $active_stat = $active = 'on' ? '1' : '0' ; 
 		$user = User::find($id);
 		$user->name = $request->input('name');
 		$user->email = $request->input('email');
 		$user->active = $active_stat;
-		$user->save();
 		$user->roles()->detach();
 		$user->roles()->attach($request->input('role'));
 		$user->save();
-		return back();
-
+		return back()->with('success','Account Updated Successfully');
 	}
 	public function changePassword(Request $request) {
 		$this->validate($request, [

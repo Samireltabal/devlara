@@ -82,6 +82,7 @@
   )
   }
 }
+$("#barcode").JsBarcode("Hi!");
 </script>
 @include('inc.messages')
 </body>
