@@ -16,8 +16,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        $locale = get_locale();
-        App::setLocale($locale);
+        // $locale = get_locale();
+        // App::setLocale($locale);
 
     }
 

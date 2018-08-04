@@ -15,10 +15,10 @@ class AddTypeToProductsAndItems extends Migration
     {
         //
         Schema::table('products', function($table) {
-            $table->char('type',100)->after('barcode');
+            $table->char('type',100)->after('barcode')->default('product');
             });
         Schema::table('items', function($table) {
-            $table->char('type',100)->after('quantity');
+            $table->char('type',100)->after('quantity')->default('product');
             });
     }
 

@@ -15,7 +15,7 @@ class AddStatusToInvoices extends Migration
     {
         //
         Schema::table('invoices', function($table) {
-            $table->boolean('status');
+            $table->boolean('status')->default(1);
             });
     }
 

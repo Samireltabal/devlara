@@ -14,7 +14,7 @@ class AddTotalToInvnetories extends Migration
     public function up()
     {
         Schema::table('inventories', function($table) {
-        $table->decimal('total');
+        $table->decimal('total')->default(0);
         });
     }
 

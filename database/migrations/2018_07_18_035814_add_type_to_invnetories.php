@@ -14,7 +14,7 @@ class AddTypeToInvnetories extends Migration
     public function up()
     {
         Schema::table('inventories', function($table) {
-        $table->integer('type');
+        $table->integer('type')->default(1);
         });
     }
 

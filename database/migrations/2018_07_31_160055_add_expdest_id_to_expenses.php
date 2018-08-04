@@ -15,7 +15,7 @@ class AddExpdestIdToExpenses extends Migration
     {
         //
         Schema::table('expenses', function($table) {
-            $table->integer('expdest_id');
+            $table->integer('expdest_id')->default(0);
             });
     }
 

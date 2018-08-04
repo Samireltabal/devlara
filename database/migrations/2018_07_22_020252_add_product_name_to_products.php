@@ -15,7 +15,7 @@ class AddProductNameToProducts extends Migration
     {
         //
         Schema::table('products', function($table) {
-            $table->char('name',100)->after('id');
+            $table->char('name',100)->after('id')->default('product_name');
             });
     
     }
