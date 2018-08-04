@@ -18,7 +18,7 @@
                         @csrf
                         {{-- <input type="hidden" name="customer_id"> --}}
                         <div class="form-group">
-                                <label for="customer_phone">{{ __("Name :") }}</label>
+                                <label for="customer_phone">{{ __("Phone :") }}</label>
                                   <input type="phone" name="customer_phone" id="customer_phone" class="form-control" placeholder="Customer Phone" aria-describedby="helpId">
                                   <small id="helpId" class="text-muted">{{__("Write Down the Phone if new")}}</small>
                         </div>

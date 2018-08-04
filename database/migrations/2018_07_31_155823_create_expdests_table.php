@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddProductNameToProducts extends Migration
+class CreateExpdestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class AddProductNameToProducts extends Migration
      */
     public function up()
     {
-        //
-        Schema::table('products', function($table) {
-            $table->char('name',100)->after('id');
-            });
-    
+        Schema::create('expdests', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
+            $table->string('name');            
+        });
     }
 
     /**
@@ -27,9 +27,6 @@ class AddProductNameToProducts extends Migration
      */
     public function down()
     {
-        //
-        Schema::table('products', function($table) {
-            $table->dropColumn('name');
-        });
+        Schema::dropIfExists('expdests');
     }
 }

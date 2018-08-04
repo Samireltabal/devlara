@@ -12,8 +12,19 @@ class Shifts extends Model
     public function sales(){
      return $this->hasMany('App\Items','shift_id');
     }
+    public function sales_total() {
+        $sales = $this->hasMany('App\Items','shift_id')->where('type','=','product')->sum('total');
+        return $sales ;
+    }
+    public function service_total() {
+        $sales = $this->hasMany('App\Items','shift_id')->where('type','=','service')->sum('total');
+        return $sales ;
+    }
     public function expenses(){
         return $this->hasMany('App\Expenses','shift_id');
+       }
+       public function salaries() {
+           return $this->hasMany('App\SalaryPayments','shift_id');
        }
     public function user() {
         return $this->belongsTo('App\User','created_by');

@@ -9,4 +9,8 @@ class Expenses extends Model
     //
     public $timestamps = 'True';
 
+    public function expdest() {
+        return $this->belongsTo('App\Expdest','expdest_id');
+    }
+
 }

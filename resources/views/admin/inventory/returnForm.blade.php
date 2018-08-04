@@ -7,7 +7,7 @@
                     <div class="col-sm-12">
                         <input type="text" class="form-control" name="product_name" id="product_name_ret" placeholder="Product Name">
                         <small id="quantity" class="text-muted">Product Name Auto Complete</small>
-                        <input type="hidden" name="product_id_ret" id="product_id">
+                        <input type="hidden" name="product_id" id="product_id_ret">
                     </div>
                 </div>
                 <div class="clearfix"></div>

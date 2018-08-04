@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
 use App\User;
+use App\Items;
 class HomeController extends Controller
 {
     /**
@@ -27,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-    return view('admin.layout.app');
+        return view('admin.home.index');
     }
     public function lang(Request $request) {
         $user_id = Auth::user()->id;
@@ -36,5 +37,10 @@ class HomeController extends Controller
         $user->locale = $lang;
         $user->save();
         return back();
+    }
+    public function sn(Request $request) {
+        $sn = $request->input('sn');
+        $item = Items::where('sn','=',$sn)->get();
+        return view('admin.home.sn',compact('item'));
     }
 }

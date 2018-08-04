@@ -20,7 +20,7 @@ class CreateItemsTable extends Migration
             $table->integer('product_id');
             $table->integer('invoice_id')->nullable();
             $table->integer('shift_id');
-            $table->char('sn',100);
+            $table->char('sn',100)->nullable();
             $table->decimal('quantity');
             $table->decimal('total');
         });

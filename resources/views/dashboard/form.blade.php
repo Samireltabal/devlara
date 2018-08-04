@@ -1,17 +1,17 @@
 <h1>{{__("Sales")}}</h1>
-<form action="{{ route('sales.submit') }}" method="post" id='submitItem'>
+<form id='submitItem'>
      {{-- hidden inputs --}}
      <div class="col-lg-12">
         <h5 class='pull-right'><span id='available_quantity'></span></h5>  
           
      </div>
-    <input type="hidden" name="shift_id" value="{{ get_shift() }}">
-    <input type="hidden" name="invoice_id" value="{{ $current_invoice["id"] }}">
+    <input type="hidden" id='shift_id' name="shift_id" value="{{ get_shift() }}">
+    <input type="hidden" id='invoice_id' name="invoice_id" value="{{ $current_invoice["id"] }}">
     <input type="hidden" name="product_id" id="product_id">
     <div class="form-group col-lg-12">
         @csrf
       <label for="barcode"><i class="fa fa-barcode" aria-hidden="true"></i> {{__("Barcode")}}</label>
-      <input type="text" class="form-control" name="barcode" id="product_barcode" aria-describedby="BarcodeHelp" placeholder="Barcode">
+      <input type="text" class="form-control" name="barcode" id="product_barcode" aria-describedby="BarcodeHelp" placeholder="Barcode" autofocus>
       <small id="BarcodeHelp" class="form-text text-muted">Scan Barcode</small>
     </div>
     <div class="form-group col-lg-12">
@@ -29,6 +29,12 @@
         <input type="text" class="form-control" name="product_quantity" id="product_quantity" aria-describedby="product_quantityHelp" placeholder="Product Quantity">
         <small id="product_quantityHelp" class="form-text text-muted">Quantity</small>
     </div>
+    <div class="form-group col-lg-12">
+            <label for="sn">{{__("Serial Number")}}</label>
+            <input type="text" class="form-control" name="sn" id="sn" aria-describedby="snHelp" placeholder="Serial Number">
+            <small id="snHelp" class="form-text text-muted">Serial Number for the warranty</small>
+        </div>
+        <input type="hidden" name="product_type" id='product_type'>
     <div class="form-group col-lg-6">
         <button type="submit"  class="btn btn-success btn-lg btn-block">Add Product</button>
     </div>
@@ -49,6 +55,8 @@
                     $('#product_name').val(ui.item.value);
                     $('#product_price').val(ui.item.price);
                     $('#product_barcode').val(ui.item.barcode);
+                    $('#product_type').val(ui.item.type);                    
+                    $('#product_quantity').val(1);
                     $('#available_quantity').text('{{__("Available Quantity")}} : ' + ui.item.quantity);
                 }
                 });
@@ -64,6 +72,8 @@
                     $('#product_barcode').val(ui.item.value);
                     $('#product_price').val(ui.item.price);
                     $('#product_name').val(ui.item.name);
+                    $('#product_type').val(ui.item.type);                    
+                    $('#product_quantity').val(1);
                     $('#available_quantity').text('{{__("Available Quantity")}} : ' + ui.item.quantity);
                 },
                 response: function(event,ui) {
@@ -74,8 +84,42 @@
                         $(this).autocomplete('close');
                     }
                 }
-                
-                
                 });
             });
+</script>
+<script>
+    // Ajax Form Submit Item 
+
+    $('#submitItem').on('submit', function(e) {
+       e.preventDefault(); 
+        var product_id = $('#product_id').val();
+        var invoice_id = $('#invoice_id').val();
+        var shift_id = $('#shift_id').val();
+        var product_price = $('#product_price').val();
+        var product_type = $('#product_type').val();
+        var sn = $('#sn').val();
+        var product_quantity = $('#product_quantity').val();
+        
+       $.ajax({
+           type: "POST",
+           url: "{{ route('sales.submit') }}",
+           data: {
+            "shift_id": shift_id,
+            "invoice_id": invoice_id,
+            "product_id": product_id,
+            "_token":	"{{ csrf_token() }}",
+            "product_price": product_price,
+            "product_type": product_type,
+            "product_quantity": product_quantity,
+            "sn": sn,
+            },
+           success: function() {
+            loadContent('{{ $current_invoice["id"] }}');
+            document.getElementById("submitItem").reset(); 
+            $('#available_quantity').text(' ');
+            toast("{{__('Success')}}","{{ __('Item Added Successfully') }}","green","fa fa-check-square-o",true,'topLeft');
+
+           }
+       });
+   });
 </script>

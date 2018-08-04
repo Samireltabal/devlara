@@ -22,6 +22,7 @@ Route::put('lang', 'HomeController@lang')->name('lang');
 // MiddleWare Web 
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/sn','HomeController@sn')->name('sn.check');
 
 Route::get('/dashboard', 'AdminController@index')->name('admin');
 
@@ -29,6 +30,10 @@ Route::group(['prefix' => 'shifts', 'middleware' => ['auth','role:admin']], func
     Route::get('/','ShiftsController@index')->name('shifts.main');
     Route::post('/create','ShiftsController@create')->name('shifts.create');
 
+});
+Route::group(['prefix' => 'expenses' , 'middleware' => ['auth', 'role:admin']], function() {
+    Route::get('/list','InterfaceController@expdest_ac')->name('expdest.list');
+    Route::post('/create','InterfaceController@addExpdense')->name('expense.create');
 });
 Route::group(['prefix' => 'suppliers', 'middleware' => ['auth','role:admin']], function() {
     Route::get('/','SuppliersController@index')->name('suppliers.main');
@@ -45,6 +50,7 @@ Route::group(['prefix' => '/sales', 'middleware' => ['auth']], function() {
     Route::get('/customersList','InterfaceController@customersAC')->name('customers.ac');
     route::get('/productAC','InterfaceController@products_list')->name('sales.products.ac');
     route::get('/productbarcode','InterfaceController@barcode')->name('sales.barcode.ac');
+    route::get('/closeInvoice/{id}','InterfaceController@toggleInvoice')->name('sales.toggle.invoice');
     
 });
 Route::group(['prefix' => 'categories', 'middleware' => ['auth','role:admin']], function() {
@@ -96,4 +102,15 @@ Route::group(['prefix' => 'inventory', 'middleware' => ['auth','role:admin']], f
                 Route::put('/profile','AccountsController@editProfile')->name('accounts.editProfile');
 
                 
+            });
+            Route::group(['prefix'=> 'employee', 'middleware'=> ['auth','role:admin']], function(){
+                route::get('/','EmployeesController@index')->name('emp.main');
+                route::get('/attendance','EmployeesController@attendance')->name('emp.att');
+                route::get('/list','EmployeesController@list_employees')->name('emp.list');
+                route::post('/create','EmployeesController@create_employee')->name('emp.create');
+                route::delete('/delete','EmployeesController@delete')->name('emp.delete');
+                route::get('/attlist','EmployeesController@att_list')->name('emp.att.list');
+                route::post('/attend','EmployeesController@attend')->name('emp.attend');
+                route::get('/Entitlements/id/{id}','EmployeesController@getEntitlements')->name('emp.entitlements');
+                route::post('/Entitlements/Add/{id}','EmployeesController@AddEntitlements')->name('emp.add.entitlements');
             });

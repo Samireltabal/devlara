@@ -8,7 +8,10 @@ $locale = get_locale();
         <div class='container-fluid pos'>
         <div class='col-lg-4'>
                 <div class='col-lg-12 panel'>
-                @include('dashboard.buttons')
+                    @include('dashboard.buttons')
+                </div>
+                <div class="col-lg-12 panel">
+                    @include('dashboard.expenses')
                 </div>
         </div>
         

@@ -23,6 +23,7 @@
 @if($locale == "ar")
 <script>
     toast("{{__('Warning')}}","{{ __('Current shift date is obselete please Contact System Administrator') }}","red","fa fa-window-close",true,'topLeft');
+    
 </script>
 @else
 <script>

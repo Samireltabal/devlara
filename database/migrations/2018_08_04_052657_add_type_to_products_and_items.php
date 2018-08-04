@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddProductNameToProducts extends Migration
+class AddTypeToProductsAndItems extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,11 @@ class AddProductNameToProducts extends Migration
     {
         //
         Schema::table('products', function($table) {
-            $table->char('name',100)->after('id');
+            $table->char('type',100)->after('barcode');
             });
-    
+        Schema::table('items', function($table) {
+            $table->char('type',100)->after('quantity');
+            });
     }
 
     /**
@@ -29,7 +31,10 @@ class AddProductNameToProducts extends Migration
     {
         //
         Schema::table('products', function($table) {
-            $table->dropColumn('name');
+            $table->dropColumn('type');
+        });
+        Schema::table('items', function($table) {
+            $table->dropColumn('type');
         });
     }
 }

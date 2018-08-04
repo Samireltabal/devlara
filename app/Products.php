@@ -40,4 +40,11 @@ class Products extends Model
             return false;
         }
     }
+    public function HasType($type) {
+        if ($this->type == $type) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

@@ -29,14 +29,12 @@ class InventoryController extends Controller
         $price = $request->input('price');
         $product_id = $request->input('product_id');
         $supplier_id = $request->input('supplier_id');
-        $shifts_obj = new Shifts;
-        $shifts = $shifts_obj::where('active',1)->limit(1)->get();
         $inventory = new Inventory;
         $inventory->type = $request->input('type');
         $inventory->product_id = $product_id ;
         $inventory->quantity = $quantity ;
         $inventory->price = $price ;
-        $inventory->shift_id = $shifts[0]->id;
+        $inventory->shift_id = get_shift();
         $inventory->supplier_id = $supplier_id ;
         $inventory->total = $quantity * $price ;
         $inventory->save();

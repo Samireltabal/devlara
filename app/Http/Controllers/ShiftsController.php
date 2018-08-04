@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Shifts;
 use Auth;
+use App\Invoices;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -25,10 +26,15 @@ class ShiftsController extends Controller
         return view('admin.shifts.index')->with(compact(['shifts','time']));
     }
     public function create(Request $request) {
+        $invoices = Invoices::where('status','=','1')->get();
+        foreach ($invoices as $invoice) {
+            $invoice->toggleStat()->save();
+        }
         $shifts = Shifts::where('active',1)->get();
         if ($shifts->count() > 0)
         {
-            foreach ($shifts as $shift) {
+            foreach ($shifts as $shift)
+            {
             $shift->active = 0;
             $shift->save();
             }

@@ -58,11 +58,19 @@ $locale = get_locale();
                                         </tr>
                                         <tr>
                                             <th scope='row'>{{ __("Total Sales") }}</th>
-                                            <td>{{ $shift->sales()->sum('total') }} {{__("EGP")}}</td>
+                                            <td>{{ $shift->sales_total() }} {{__("EGP")}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope='row'>{{ __("Total Services Sales") }}</th>
+                                            <td>{{ $shift->service_total() }} {{__("EGP")}}</td>
                                         </tr>
                                         <tr>
                                             <th scope='row'>{{ __("Total Expenses") }}</th>
                                             <td>{{ $shift->expenses()->sum('expense_sum') }} {{__("EGP")}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">{{__("Salaries Paid")}}</th>
+                                        <td> {{ $shift->salaries()->sum('paid') }}</td>
                                         </tr>
                                         <tr>
                                         <th scope="row">{{__("Inventory Purchased")}}</th>

@@ -15,14 +15,15 @@ $locale = get_locale();
                           <th>{{ __("Status") }}</th>
                           <th>{{ __("BarCode") }}</th>
                           <th>{{ __("Purchase Price") }} <small><sub> Average </sub></small></th>
+                          <th>{{ __("Quantity Available") }}</th>
+                          <th>{{ __("Type") }}</th>
                           <th>{{ __("Options") }}</th>
-
                           </tr>
                           </thead>
                           <tbody>
                             @foreach($products as $key=>$products_category)
                             <tr class="success">
-                                <td colspan="9"> <h4 class='text-center'> {{ category_name($key) }} </h4></td>
+                                <td colspan="20"> <h4 class='text-center'> {{ category_name($key) }} </h4></td>
                                 <thead class="thead-default">
                                     <tr>
                                       <th>{{__("ID")}}</th>
@@ -33,8 +34,9 @@ $locale = get_locale();
                                     <th>{{ __("BarCode") }}</th>
                                     <th>{{ __("Purchase Price") }} <small><sub> Average </sub></small></th>
                                     <th>{{ __("Quantity Available") }}</th>
+                                    <th>{{ __("Type") }}</th>
                                     <th>{{ __("Options") }}</th>
-          
+                    
                                     </tr>
                                     </thead>
                             </tr>
@@ -65,7 +67,13 @@ $locale = get_locale();
                                 </td>
                                 <td>{{ number_format($product->average_price(), 2, '.', ',') }}</td>
                               <td>{{ $product->quantity_available() }}</td>
-
+                              <td>
+                                @if($product->HasType('service'))
+                                <i class="fa fa-wrench" aria-hidden="true"></i>
+                                @else
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                @endif
+                              </td>
                                 <td>
                           
                                     <form style="display:inline;" id='toggle-{{$product->id}}' action="{{ route('product.toggleState') }}" method="post">

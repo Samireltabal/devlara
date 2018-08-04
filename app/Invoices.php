@@ -15,4 +15,8 @@ class Invoices extends Model
     public function items() {
         return $this->hasMany('App\Items','invoice_id');
     }
+    public function toggleStat() {
+        $this->status = !$this->status;
+        return $this;
+    }
 }

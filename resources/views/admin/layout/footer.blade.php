@@ -14,7 +14,7 @@
   
 </div>
 <!-- ./wrapper -->
- 
+
 <script>
       var menuId = '#{{  str_slug(Route::getFacadeRoot()->current()->getName()) }}';
     var li = $(menuId).closest(".treeview");

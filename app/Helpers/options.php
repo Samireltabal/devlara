@@ -3,6 +3,9 @@
 	use App\Shifts;
 	use Carbon\Carbon;
 	use App\Categories;
+	use App\Products;
+	use App\Employees;
+	use App\Attendances;
 	
 	function get_locale(){
 		if (Auth::check()){
@@ -69,5 +72,31 @@
 		}else{
 			return '<span class="label label-danger">' . __("Inactive"). '</span>';
 		}
+	}
+	function getEntitlements($employee_id) {
+        $employee = Employees::find($employee_id);
+        if($employee){
+        $rate = $employee->rate;
+        $attendances = $employee->attendances->count();
+        $entitlements = $rate * $attendances;
+        $payments = $employee->payments->sum('paid');
+        $net = $entitlements - $payments ;
+        $response = ['Entitlements' => $net ];
+        return $net;
+        }else{
+            return response()->json( ['Entitlements'=>'faild']  ,200);
+        }
+    }
+	function get_product_name($id) {
+		// if($id != null)
+		// {
+		return $product = Products::find($id);
+		// if($product->count() > 0)
+		// {
+		// return $product->name;
+		// }
+		// }else{
+		// 	return 'deleted';
+		// }
 	}
 ?>

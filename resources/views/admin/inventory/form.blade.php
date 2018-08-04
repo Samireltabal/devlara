@@ -5,8 +5,8 @@
             <label for="product_name" class="col-sm-12 col-form-label">Product name</label>
             <div class="col-sm-12">
                 <input type="text" class="form-control" name="product_name" id="product_name" placeholder="Product Name">
-                <small id="quantity" class="text-muted">Product Name Auto Complete</small>
-                <input type="hidden" name="product_id" id="product_id">
+                <small id="product_name" class="text-muted">Product Name Auto Complete</small>
+                <input type="hidden" id="product_id" name="product_id">
             </div>
         </div>
         <div class="clearfix"></div>
@@ -45,16 +45,6 @@
 </div>
 
 <script>
-    $(function(){
-	 $( "#Supplier" ).autocomplete({
-	  source: "{{ route('inventory.supplier') }}",
-	  minLength: 3,
-	  select: function(event, ui) {
-	  	$('#Supplier').val(ui.item.value);
-        $('#supplier_id').val(ui.item.id);
-	  }
-	});
-});
 $(function(){
 	 $( "#product_name" ).autocomplete({
 	  source: "{{ route('inventory.product') }}",
@@ -65,4 +55,15 @@ $(function(){
 	  }
 	});
 });
+    $(function(){
+	 $( "#Supplier" ).autocomplete({
+	  source: "{{ route('inventory.supplier') }}",
+	  minLength: 3,
+	  select: function(event, ui) {
+	  	$('#Supplier').val(ui.item.value);
+        $('#supplier_id').val(ui.item.id);
+	  }
+	});
+});
+
 </script>

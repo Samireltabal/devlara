@@ -83,8 +83,8 @@
               </span>
                 </a>
           <ul class="treeview-menu">  
-            <li><a href="#">{{__("Create Account")}}</a></li>
-            <li><a href="#">{{__("List Accounts")}}</a></li>
+              <li id='empmain'><a href="{{route("emp.main")}}">{{__("List Employees")}}</a></li>
+            <li id='empatt'><a href="{{route("emp.att")}}">{{__("Employees Attendance")}}</a></li>
           </ul>
         </li>
           

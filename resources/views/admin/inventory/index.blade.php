@@ -11,7 +11,7 @@ $locale = get_locale();
 @section('content')
       <div class="box">
             <div class="box-header">
-              
+              {{get_shift()}}
               <h3 class="box-title">{{ __("Inventory")}}</h3>
               @if(get_locale() == "ar")
               <?php $dir = "pull-left"; ?>  
