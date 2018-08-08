@@ -27,6 +27,7 @@ class ProductsController extends Controller
         $product->price = $request->input('product_price');
         $product->category_id = $request->input('product_category');
         $product->active = $request->input('active');
+        $product->type = $request->input('product_type');
         $product->save();
         $product->barcode = str_random(4) . $product->id . Carbon::today()->year.Carbon::today()->month.Carbon::today()->day ;
         $product->save();

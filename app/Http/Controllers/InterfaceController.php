@@ -117,7 +117,7 @@ class InterfaceController extends Controller
                 return [$item['product_id'] => $item];
             });
             $sum_invoice = Items::where('shift_id','=',get_shift())->where('invoice_id','=',$invoice->id)->get()->sum('total');
-            return view('dashboard.invoice')->with(compact('invoice','invoice_items','sum_invoice'));
+            return view('dashboard.invoice')->with(compact('invoice','invoice_items','sum_invoice','id'));
         }else {
             //$invoice_items = Items::where('shift_id','=',get_shift())->groupBy('product_id')->get(); 
             $invoice_items = Items::where('shift_id','=',get_shift())->where('invoice_id','=','0')->get();
@@ -134,7 +134,7 @@ class InterfaceController extends Controller
             // ->get();
 
             $invoice = null;
-            return view('dashboard.invoice')->with(compact('invoice_items','invoice','sum_invoice'));
+            return view('dashboard.invoice')->with(compact('invoice_items','invoice','sum_invoice','id'));
         }
 
         
@@ -169,6 +169,26 @@ class InterfaceController extends Controller
             $results[] = [ 'id' => $product->id, 'value' => $product->barcode, 'price' => $product->price , 'quantity' => $product->quantity_available() , 'name' => $product->name , 'type' => $product->type ];
         }
         return Response::json($results);
+    }
+    public function print($id = '0') {
+        if ($id !== '0') {
+            $invoice = Invoices::find($id);
+            $invoice_items = Items::where('shift_id','=',get_shift())->where('invoice_id','=',$invoice->id)->get();
+            $invoice_items = $invoice_items->mapToGroups(function ($item, $key) {
+                return [$item['product_id'] => $item];
+            });
+            $sum_invoice = Items::where('shift_id','=',get_shift())->where('invoice_id','=',$invoice->id)->get()->sum('total');
+            return view('dashboard.print')->with(compact('invoice','invoice_items','sum_invoice','id'));
+        }else {
+            //$invoice_items = Items::where('shift_id','=',get_shift())->groupBy('product_id')->get(); 
+            $invoice_items = Items::where('shift_id','=',get_shift())->where('invoice_id','=','0')->get();
+            $invoice_items = $invoice_items->mapToGroups(function ($item, $key) {
+                return [$item['product_id'] => $item];
+            });
+            $sum_invoice = Items::where('shift_id','=',get_shift())->where('invoice_id','=','0')->get()->sum('total');
+            $invoice = null;
+            return view('dashboard.print')->with(compact('invoice_items','invoice','sum_invoice','id'));
+        }
     }
     /*
     *   Create New Invoice 

@@ -13,7 +13,7 @@ $locale = get_locale();
                     <div class="panel-body">
                     <form id='snCheck'>
                             <div class="form-group">
-                              <label for="sn">Serial Number</label>
+                              <label for="sn">{{__("Serial Number")}}</label>
                               <input type="text" name="sn" id="sn" class="form-control" placeholder="Serial Number" aria-describedby="sn">
                               <small id="sn" class="text-muted">Serial Number check</small>
                             </div>
@@ -32,7 +32,7 @@ $locale = get_locale();
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
-                          <label for="product_name">Product name</label>
+                          <label for="product_name">{{__("Product name")}}</label>
                           <input type="text" name="product_name" id="product_name" class="form-control" placeholder="Product Name" aria-describedby="product_name">
                           <small id="product_name" class="text-muted">Product Quantity Search Auto Complete</small>
                         </div>                    
@@ -45,7 +45,7 @@ $locale = get_locale();
                     </div>
                   </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 hidden">
                 <div class="panel panel-default">
                         <div class="panel-heading">
                           <h3 class="panel-title">Panel title</h3>

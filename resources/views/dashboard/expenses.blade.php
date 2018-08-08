@@ -1,22 +1,22 @@
-<a id="addExpense" class="btn btn-warning btn-lg btn-block" href="#" role="button" style="margin:0.5em 0;">Add Expense</a>
+<a id="addExpense" class="btn btn-warning btn-lg btn-block" href="#" role="button" style="margin:0.5em 0;">{{__("Add Expense")}}</a>
 <div class='expenseForm' style='display:none;'>
 <form action="{{ route('expense.create') }}" id='ExpenseFormCreate' method="post">
     <div class="form-group">
-      <label for="expdest">Expense Destination</label>
+      <label for="expdest">{{__("Expense Destination")}}</label>
       <input type="text" class="form-control" name="expdest" id="expdest" aria-describedby="expDest" placeholder="Expense Destionation" required>
       <small id="expDest" class="form-text text-muted">Expense Destination Auto Complete If predefined</small>
     </div>
     <div class="form-group">
-      <label for="total">Money Paid</label>
+      <label for="total">{{__("Money Paid")}}</label>
       <input type="text" name="total" id="total" class="form-control" placeholder="Money Paid" aria-describedby="helpId" required>
       <small id="helpId" class="text-muted">The total Ammount of money paid</small>
     </div>
     @csrf
     <div class="form-group">
-      <label for="description">Description</label>
+      <label for="description">{{__("Description")}}</label>
       <textarea class="form-control" name="description" id="description" rows="3" required></textarea>
     </div>
-    <button type="submit" class="btn btn-success btn-lg btn-block" style="margin-bottom:4px;">Submit Expense</button>
+    <button type="submit" class="btn btn-success btn-lg btn-block" style="margin-bottom:4px;">{{__("Submit Expense")}}</button>
 </form>
 
 </div>

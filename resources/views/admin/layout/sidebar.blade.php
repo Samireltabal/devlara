@@ -7,27 +7,14 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="http://placehold.it/160x160" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{ Auth::user()->name }}</p>
           <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <a href="#"><i class="fa fa-circle text-success"></i> Active</a>
         </div>
       </div>
-
-      {{-- <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-        </div>
-      </form>
-      <!-- /.search form --> --}}
-
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <li id='dashboard'><a href="{{ route('dashboard') }}"><i class="fa fa-home"></i> <span>{{ __("Home")}}</span></a></li>
@@ -37,7 +24,7 @@
         <!--Members Area-->
       <li id="accountsprofile"><a href="{{ route('accounts.profile') }}"><i class="fa fa-user"></i> <span>{{ __("Profile")}}</span></a></li>
         <li id='salesmain'><a href="{{route('sales.main')}}"><i class="fa fa-shopping-cart"></i> <span>{{ __("Sales")}}</span></a></li>
-        <li><a href="#"><i class="fa fa-money"></i> <span>{{ __("My Salary")}}</span></a></li>
+        <li class='hidden'><a href="#"><i class="fa fa-money"></i> <span>{{ __("My Salary")}}</span></a></li>
         @if(Auth::user()->hasRole('admin'))
         <!--Admins Area-->
         <li class="header">{{ __("Admins Area") }}</li>
@@ -95,16 +82,15 @@
               </span>
           </a>
           <ul class="treeview-menu">  
-            <li><a href="#">{{__("Today Full Report")}}</a></li>
-            <li><a href="#">{{__("Monthly Report")}}</a></li>
-            <li><a href="#">{{__("Yearly Report")}}</a></li>
-            <li><a href="#">{{__("Period Report")}}</a></li>
+            <li class='hidden' id='reportstotal'><a href="{{ route('reports.total') }}">{{__("Overall Report")}}</a></li>
+            <li id='reportstoday'><a href="{{ route('reports.today') }}">{{__("Current Shift Report")}}</a></li>
+            <li id='reportsmonthly'><a href="{{ route('reports.monthly') }}">{{__("Monthly Report")}}</a></li>
+            <li id='reportsall'><a href="{{ route('reports.all') }}">{{__("Yearly Report")}}</a></li>
+            <li class='hidden' id='reportscustom'><a href="{{ route('reports.custom') }}">{{__("Period Report")}}</a></li>
           </ul>
         </li>
-        <li><a href="#"><i class="fa fa-hdd-o"></i> <span>{{ __("Backup")}}</span></a></li>
-                <li><a href="#"><i class="fa fa-wrench"></i> <span>{{ __("Settings")}}</span></a></li>
-
-          
+      <li id='backupmain'><a href="{{ route('backup.main') }}"><i class="fa fa-hdd-o"></i> <span>{{ __("Backup")}}</span></a></li>
+                <li class='hidden'><a href="#"><i class="fa fa-wrench"></i> <span>{{ __("Settings")}}</span></a></li>        
         @endif
       </ul>
       <!-- /.sidebar-menu -->

@@ -1,18 +1,21 @@
+
+<?php 
+$locale = get_locale();
+  		App::setLocale($locale);
+?>  
+<span class="pull-right">
+        <a href="{{ route('invoice.print',$id) }}" target="_blank" class="btn btn-default btn-lg" style="margin-top:1em;"><i class="fa fa-print" aria-hidden="true"></i> {{__("print")}}</a>
+        </span>
 @if($invoice)
-<h3>Current Invoice</h3>
+<h3>{{__("Current Invoice")}}</h3>
 @else
-<h3>public sales</h3>
+<h3>{{__("public sales")}}</h3>
 @endif
 
 
 
 
 
-
-<?php 
-$locale = get_locale();
-  		App::setLocale($locale);
-?>  
 
 <table class="table table-sm table-bordered table-responsive">
     <thead class="thead-default">

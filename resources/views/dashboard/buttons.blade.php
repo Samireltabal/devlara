@@ -3,7 +3,7 @@
     <tr>
                 <td colspan="2">
                 <form action="{{ route('sales.invoiceRedirect') }}" method="POST">
-                        <label for="invoice_id">Invoices :</label>
+                        <label for="invoice_id">{{__("Invoices")}} :</label>
                         @csrf
                             <select class='form-control' name="invoice_id" id="Invoices"  onchange="this.form.submit()">
                                     <option value='0'>Public</option>

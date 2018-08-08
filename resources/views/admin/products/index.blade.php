@@ -37,6 +37,14 @@ $locale = get_locale();
                             <small id="helpId" class="form-text text-muted">{{__("Product Price")}}</small>
                       </div>
                       <div class="form-group">
+                            <label for="product_type">{{__("Product Type")}}</label>
+                            <select type="text" class="form-control" name="product_type" id="product_type" aria-describedby="helpId" placeholder="{{__("Product Type")}}">
+                                    <option value='product'>Product</option>
+                                    <option value='service'>Service</option>
+                            </select>
+                              <small id="helpId" class="form-text text-muted">{{__("Product Type")}}</small>
+                        </div>
+                      <div class="form-group">
                           <label for="product_category">{{__("Product Category")}}</label>
                           <select type="text" class="form-control" name="product_category" id="product_category" aria-describedby="helpId" placeholder="{{__("Product Category")}}">
                               @foreach($cats as $cat)
@@ -64,10 +72,13 @@ $locale = get_locale();
             loadContent();
             $( '#TheCatForm' ).on( 'submit', function(e) {
                 e.preventDefault();
+                
                 var name = $(this).find('input[name=product_name]').val();
                 var price = $(this).find('input[name=product_price]').val();
                 var active = $(this).find('input[name=active]').val();
+                var theType = $(this).find('select[name=product_type]').val();
                 var category = $(this).find('select[name=product_category]').val();
+                console.log(theType);
                 $.ajax({
                     type: "POST",
                     url: '{{ route("products.create")}}',
@@ -75,6 +86,7 @@ $locale = get_locale();
                         "product_name": name,
                         "product_price": price,
                         "active": 1,
+                        "product_type": theType, 
                         "product_category": category,
                         "_token": "{{ csrf_token() }}"
                         }, 

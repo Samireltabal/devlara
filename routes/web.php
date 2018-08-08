@@ -40,6 +40,13 @@ Route::group(['prefix' => 'suppliers', 'middleware' => ['auth','role:admin']], f
     Route::post('/create','SuppliersController@create')->name('suppliers.create');
 
 });
+Route::group(['prefix' => 'backup' , 'middleware' => ['auth', 'role:admin']], function() {
+ // Backup routes
+ Route::get('/', 'BackupController@index')->name('backup.main');
+ Route::get('/create', 'BackupController@create');
+ Route::get('/download/{file_name}', 'BackupController@download');
+ Route::get('/delete/{file_name}', 'BackupController@delete');
+});
 Route::group(['prefix' => '/sales', 'middleware' => ['auth']], function() {
     Route::get('/','InterfaceController@index')->name('sales.main');
     Route::get('/invoice/{id}','InterfaceController@invoice_ajax')->name('sales.invoice.ajax');
@@ -51,6 +58,7 @@ Route::group(['prefix' => '/sales', 'middleware' => ['auth']], function() {
     route::get('/productAC','InterfaceController@products_list')->name('sales.products.ac');
     route::get('/productbarcode','InterfaceController@barcode')->name('sales.barcode.ac');
     route::get('/closeInvoice/{id}','InterfaceController@toggleInvoice')->name('sales.toggle.invoice');
+    route::get('/print/invoice/{id}','InterfaceController@print')->name('invoice.print');
     
 });
 Route::group(['prefix' => 'categories', 'middleware' => ['auth','role:admin']], function() {
@@ -113,4 +121,20 @@ Route::group(['prefix' => 'inventory', 'middleware' => ['auth','role:admin']], f
                 route::post('/attend','EmployeesController@attend')->name('emp.attend');
                 route::get('/Entitlements/id/{id}','EmployeesController@getEntitlements')->name('emp.entitlements');
                 route::post('/Entitlements/Add/{id}','EmployeesController@AddEntitlements')->name('emp.add.entitlements');
+            });
+
+            Route::group(['prefix' => 'reports' , 'middleware' => ['auth','role:admin']], function(){
+                route::get('/','ReportsController@index')->name('reports.all');
+                route::get('/main','ReportsController@total')->name('reports.total');
+                route::get('/totalsJson','ReportsController@totalsJson')->name('reports.totals');
+                route::get('/todayJson','ReportsController@todayJson')->name('reports.today.json');
+                route::get('/today','ReportsController@today')->name('reports.today');
+                route::get('/todayjson','ReportsController@full_report')->name('today.json');
+                route::get('/month','ReportsController@month')->name('reports.monthly');
+                route::get('/monthjson','ReportsController@monthJson')->name('reports.monthly.json');
+                route::get('/year','ReportsController@year')->name('reports.yearly');
+                route::get('/custom','ReportsController@custom')->name('reports.custom');
+                route::get('/date/{date1}/{date2}','ReportsController@date')->name('reports.date');
+                route::get('/product/{id}','ReportsController@product')->name('reports.product');
+
             });

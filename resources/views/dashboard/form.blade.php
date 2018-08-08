@@ -12,34 +12,34 @@
         @csrf
       <label for="barcode"><i class="fa fa-barcode" aria-hidden="true"></i> {{__("Barcode")}}</label>
       <input type="text" class="form-control" name="barcode" id="product_barcode" aria-describedby="BarcodeHelp" placeholder="Barcode" autofocus>
-      <small id="BarcodeHelp" class="form-text text-muted">Scan Barcode</small>
+      <small id="BarcodeHelp" class="form-text text-muted">{{__("Scan Barcode")}}</small>
     </div>
     <div class="form-group col-lg-12">
         <label for="barcode">{{__("Product name")}}</label>
         <input type="text" class="form-control" name="product_name" id="product_name" aria-describedby="product_nameHelp" placeholder="Product Name">
-        <small id="product_nameHelp" class="form-text text-muted">Search Product By name</small>
+        <small id="product_nameHelp" class="form-text text-muted">{{__("Search Product By name")}}</small>
     </div>
     <div class="form-group col-lg-6">
         <label for="barcode">{{__("Product price")}}</label>
         <input type="text" class="form-control" name="product_price" id="product_price" aria-describedby="product_priceHelp" placeholder="Product Price">
-        <small id="product_priceHelp" class="form-text text-muted">Price</small>
+        <small id="product_priceHelp" class="form-text text-muted">{{__("Price")}}</small>
     </div>
     <div class="form-group col-lg-6">
         <label for="product_quantity">{{__("Product Quantity")}}</label>
         <input type="text" class="form-control" name="product_quantity" id="product_quantity" aria-describedby="product_quantityHelp" placeholder="Product Quantity">
-        <small id="product_quantityHelp" class="form-text text-muted">Quantity</small>
+        <small id="product_quantityHelp" class="form-text text-muted">{{__("Quantity")}}</small>
     </div>
     <div class="form-group col-lg-12">
             <label for="sn">{{__("Serial Number")}}</label>
             <input type="text" class="form-control" name="sn" id="sn" aria-describedby="snHelp" placeholder="Serial Number">
-            <small id="snHelp" class="form-text text-muted">Serial Number for the warranty</small>
+            <small id="snHelp" class="form-text text-muted">{{__("Serial Number for the warranty")}}</small>
         </div>
         <input type="hidden" name="product_type" id='product_type'>
     <div class="form-group col-lg-6">
-        <button type="submit"  class="btn btn-success btn-lg btn-block">Add Product</button>
+        <button type="submit"  class="btn btn-success btn-lg btn-block">{{__("Add Product")}}</button>
     </div>
     <div class="form-group col-lg-6">
-        <button type="reset"  class="btn btn-warning btn-lg btn-block">Clear</button>
+        <button type="reset"  class="btn btn-warning btn-lg btn-block">{{__("Clear")}}</button>
     </div>
     
 </form>
