@@ -1,0 +1,28 @@
+@page {
+    /* dimensions for the whole page */
+    size: A5;
+    
+    margin: 0;
+}
+
+body.a5 {
+    /* A5 dimensions */
+    height: 210mm;
+    width: 148.5mm;
+
+    margin: 0;
+    padding: 1em;
+}
+body.a4 {
+    /* A5 dimensions */
+    height: 297mm;
+    width: 210mm;
+
+    margin: 0;
+    padding: 1em;
+}
+
+html {
+    /* off-white, so body edge is visible in browser */
+    background: #eee;
+}

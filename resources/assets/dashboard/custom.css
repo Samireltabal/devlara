@@ -1,0 +1,8 @@
+/* LTR VERSION */
+* , h1 , h2 , h3 , h4 ,h5 ,p ,a ,button ,input ,sub , sup , small , strong {
+    font-family: 'Open Sans', sans-serif;
+    color:#fff;
+}
+body {
+    background: #2c3e50;
+}
