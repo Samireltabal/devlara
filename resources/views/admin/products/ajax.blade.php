@@ -101,6 +101,7 @@ $locale = get_locale();
                                     var id = $(this).find('input[name=id]').val();
                                     var name = $(this).find('input[name=product_name]').val();
                                     var price = $(this).find('input[name=product_price]').val();
+                                    var theType = $(this).find('select[name=product_type]').val();
                                     var category = $(this).find('select[name=product_category]').val();
                                     $.ajax({
                                         type: "POST",
@@ -109,6 +110,7 @@ $locale = get_locale();
                                             "name": name,
                                             "id": id,
                                             "price": price,
+                                            "product_type": theType,
                                             "category": category,
                                             "_token": "{{ csrf_token() }}"
                                             }, 
@@ -197,6 +199,14 @@ $locale = get_locale();
                                           <input type="text" class="form-control" name="product_price" id="product_price" aria-describedby="helpId" value="{{ $product->price }}" placeholder="{{__("Product Price")}}">
                                             <small id="helpId" class="form-text text-muted">{{__("Product Price")}}</small>
                                       </div>
+                                      <div class="form-group">
+                                        <label for="product_type">{{__("Product Type")}}</label>
+                                        <select type="text" class="form-control" name="product_type" id="product_type" aria-describedby="helpId" placeholder="{{__("Product Type")}}">
+                                                <option value='product'>Product</option>
+                                                <option value='service'>Service</option>
+                                        </select>
+                                          <small id="helpId" class="form-text text-muted">{{__("Product Type")}}</small>
+                                    </div>
                                       <div class="form-group">
                                           <label for="product_category">{{__("Product Category")}}</label>
                                           <select type="text" class="form-control" name="product_category" id="product_category" aria-describedby="helpId" placeholder="{{__("Product Category")}}">

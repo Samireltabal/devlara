@@ -1,5 +1,9 @@
 /node_modules
 /public/hot
+app/Http/Controllers/installerController.php
+app/Http/Controllers/itemInstaller.php
+app/Http/Controllers/itemInstaller2.php
+app/Http/Controllers/itemInstaller3.php
 /public/storage
 /storage/*.key
 /vendor

@@ -21,9 +21,14 @@ class Products extends Model
         {
         $sum_price = $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('total');
         $sum_count = $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('quantity');
+        if($sum_count !== 0)
+        {
         return $sum_price / $sum_count ;
         }else{
-            return '0.00';
+            return $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('price') / $this->hasMany('App\Inventory','product_id')->where('type','=','2')->count() ;
+        }
+        }else{
+            return $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('price') / $this->hasMany('App\Inventory','product_id')->where('type','=','2')->count() ;
         }
     }
     public function quantity_available() {

@@ -147,7 +147,7 @@ class InterfaceController extends Controller
         $results = array();
         $queries = DB::table('products')
             ->where('name', 'LIKE', '%'.$term.'%')
-            ->take(5)->get();
+            ->get();
         
         foreach ($queries as $query)
         {

@@ -44,8 +44,8 @@
 		}
 	}
 	function get_shift() {
-		$shifts = Shifts::where('active',1)->limit(1)->get();
-		return $shifts[0]->id;
+		$shifts = Shifts::where('active',1)->limit(1)->get()->first();
+		return $shifts->id;
 	}
 	function get_current_shift_date() {
 		$shifts = Shifts::where('active',1)->limit(1)->get();
@@ -53,8 +53,8 @@
 	}
 	function check_shift() {
 		$time = Carbon::today()->Format('Y-m-d');
-		$shifts = Shifts::where('active',1)->limit(1)->get();
-		$shift_time = $shifts[0]->created_at;
+		$shifts = Shifts::where('active',1)->limit(1)->get()->first();
+		$shift_time = $shifts->created_at;
 		if($time != $shift_time) {
 			return False;
 		}else{

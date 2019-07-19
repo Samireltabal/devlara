@@ -138,3 +138,12 @@ Route::group(['prefix' => 'inventory', 'middleware' => ['auth','role:admin']], f
                 route::get('/product/{id}','ReportsController@product')->name('reports.product');
 
             });
+
+            // Route::group( ['prefix'=>'installer' , 'middleware' => ['web']], function(){
+            //     route::get('/','installerController@index');
+            //     route::get('/products','installerController@product_migration');
+            //     route::get('/shifts','installerController@shifts');
+            //     route::get('/items','itemInstaller@items');
+            //     route::get('/items/2','itemInstaller2@items2');
+            //     route::get('/items/3','itemInstaller3@items3');
+            // });

@@ -95,17 +95,19 @@ $locale = get_locale();
                     </h3>
                 @endif
             </div>
-          <div class="box-footer clearfix">
-          <form action="{{ route("shifts.create")}}" method="post">
-                    <div class="form-group">
-                        @csrf
-                        <button type="submit" class='btn btn-success btn-block'>
-                            {{__("New Shift")}}
-                        </button>
-                    </div>
-                </form>
-            </div>
+          
         </div>
      
 @endforeach
-@endsection
+<div class="box-footer clearfix">
+    <form action="{{ route("shifts.create")}}" method="post">
+              <div class="form-group">
+                  @csrf
+                  <button type="submit" class='btn btn-success btn-block'>
+                      {{__("New Shift")}}
+                  </button>
+              </div>
+          </form>
+      </div>
+      @endsection
+ 
