@@ -9,7 +9,7 @@
 
 ## Current Version
 
-V 0.9.0B
+V 0.9.2B
 
 ## Ehome Accounting System
 - Sales System / Shifts
@@ -21,9 +21,28 @@ V 0.9.0B
 - Customers Data
 - Employees Data
 - Reports and Statistics 
+- Backup Generate / Download 
 
 ## Known Bugs 
-- Downloading Backups 
+- None
+
+## Installation
+
+- Clone the Repository
+- enter the directory
+- $ composer install
+- $ php artisan key:generate
+- $ php artisan migrate
+- $ php artisan db:seed --class=InstallerSeeder
+- Edit Your Env File to your App Name
+- $php artisan storage:link
+- Login Using admin@domain.com / password
+- Start Using The Script
+
+## Editing 
+
+- Logo  /public/img/logo.png ( Printable invoice )
+
 
 ## About Laravel
 
