@@ -19,23 +19,22 @@ class Products extends Model
     public function average_price() {
         if ($this->Hasinventory())
         {
-        $sum_price = $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('total');
-        $sum_count = $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('quantity');
-        if($sum_count !== 0)
-        {
-        return $sum_price / $sum_count ;
+            $sum_price = $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('total');
+            $sum_count = $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('quantity');
+            if($sum_count !== 0){
+                return $sum_price / $sum_count ;
+            }else{
+                return $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('price') / $this->hasMany('App\Inventory','product_id')->where('type','=','2')->count();
+            }
         }else{
-            return $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('price') / $this->hasMany('App\Inventory','product_id')->where('type','=','2')->count() ;
-        }
-        }else{
-            return $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('price') / $this->hasMany('App\Inventory','product_id')->where('type','=','2')->count() ;
+            return $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('price') / $this->hasMany('App\Inventory','product_id')->where('type','=','2')->count();
         }
     }
     public function quantity_available() {
         $purchased = $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('quantity');
         $returns = $this->hasMany('App\Inventory','product_id')->where('type','=','3')->sum('quantity');
         $bought = $this->hasMany('App\Inventory','product_id')->where('type','=','1')->sum('quantity');
-        return $purchased - $bought + $returns ;
+        return $purchased - $returns - $bought ;
     }
     public function Hasinventory() {
         $inventory = $this->hasMany('App\Inventory','product_id')->where('type','=','2');

@@ -27,9 +27,11 @@ $locale = get_locale();
                 <div class="clearfix"></div>
                 
             </div>
+            @if( 1)
             <div class="return" id="returndiv" style='display:none;'>
-                @include('admin.inventory.Returnform')
+                @include('admin.inventory.returnForm')
             </div>
+            @endif
             <div id='boxBody' class="box-body clearfix">
                 <h3 class="box-title">{{ __("Add Inventory")}}</h3>
                 @include('admin.inventory.form')

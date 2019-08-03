@@ -11,7 +11,7 @@ class BackupController extends Controller
     public function index()
     {
         $disk = Storage::disk('local');
-        $files = Storage::files('/Ehome');
+        $files = Storage::files(config('app.name'));
         $backups = [];
         // make an array of backup files, with their filesize and creation date
         foreach ($files as $k => $f) {
@@ -19,7 +19,7 @@ class BackupController extends Controller
             if (substr($f, -4) == '.zip' && $disk->exists($f)) {
                 $backups[] = [
                     'file_path' => $f,
-                    'file_name' => str_replace(config('laravel-backup.backup.name') . '/', '', $f),
+                    'file_name' => str_replace(config('app.name') . '/', '', $f),
                     'file_size' => $disk->size($f),
                     'last_modified' => $disk->lastModified($f),
                 ];
@@ -52,14 +52,14 @@ class BackupController extends Controller
      */
     public function download($file_name)
     {
-        $file = config('laravel-backup.backup.name') . '/' . $file_name;
+        $file = config('app.name') . '/' . $file_name;
         $disk = Storage::disk(config('laravel-backup.backup.destination.disks')[0]);
         if ($disk->exists($file)) {
             $fs = Storage::disk(config('laravel-backup.backup.destination.disks')[0])->getDriver();
             $stream = $fs->readStream($file);
-            return \Response::stream(function () use ($stream) {
+            return \Response::streamDownload(function () use ($stream) {
                 fpassthru($stream);
-            }, 200, [
+            }, $file_name, [
                 "Content-Type" => $fs->getMimetype($file),
                 "Content-Length" => $fs->getSize($file),
                 "Content-disposition" => "attachment; filename=\"" . basename($file) . "\"",
@@ -74,8 +74,8 @@ class BackupController extends Controller
     public function delete($file_name)
     {
         $disk = Storage::disk('local');
-        if ($disk->exists(config('laravel-backup.backup.name') . '/' . $file_name)) {
-            $disk->delete(config('laravel-backup.backup.name') . '/' . $file_name);
+        if ($disk->exists(config('app.name') . '/' . $file_name)) {
+            $disk->delete(config('app.name') . '/' . $file_name);
             return redirect()->back();
         } else {
             abort(404, "The backup file doesn't exist.");

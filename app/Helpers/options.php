@@ -90,7 +90,7 @@
 	function get_product_name($id) {
 		// if($id != null)
 		// {
-		return $product = Products::find($id);
+		return $product = Products::findOrFail($id);
 		// if($product->count() > 0)
 		// {
 		// return $product->name;
@@ -110,5 +110,8 @@
 		}
 		
 		return round($size, $precision).$units[$i];
+	}
+	function siteName($string) {
+		return "$string[0]$string[1]" ;
 	}
 ?>

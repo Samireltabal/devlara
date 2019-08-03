@@ -79,7 +79,7 @@ $locale = get_locale();
                                                 </tr>
                                         <tr>
                                             <th scope='row'>{{ __("Available Cash") }}</th>
-                                            <td>{{ $shift->sales()->sum('total') - $shift->expenses()->sum('expense_sum') - $shift->total_returns() }} {{__("EGP")}}</td>
+                                            <td>{{ $shift->sales()->sum('total') - $shift->expenses()->sum('expense_sum') + $shift->total_returns() - $shift->total_paid() }} {{__("EGP")}}</td>
                                         </tr>
                                     @if($time !== $shift->created_at)
                                     <tr>

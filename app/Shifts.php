@@ -39,7 +39,7 @@ class Shifts extends Model
         return $this->hasMany('App\Inventory','shift_id')->where('type','=','2')->sum('total');
     }
     public function total_returns() {
-        return $this->hasMany('App\Inventory','shift_id')->where('type','=','3')->where('supplier_id','=',NULL)->sum('total');
+        return $this->hasMany('App\Inventory','shift_id')->where('type','=','3')->sum('total');
     }
     public function getCreatedAtAttribute($date)
 {

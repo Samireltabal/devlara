@@ -21,11 +21,11 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>E</b>H</span>
+    <span class="logo-mini"><b>{{ siteName(env('APP_NAME')) }}</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Electronics</b>Home</span>
+    <span class="logo-lg"><b>{{ env('APP_NAME') }}</b></span>
     </a>
 
     <!-- Header Navbar -->
@@ -38,6 +38,7 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
+          @if(1 == 2)
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -133,6 +134,7 @@
               </li>
             </ul>
           </li>
+          @endif
           <!-- User Account Menu -->
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
@@ -155,22 +157,19 @@
               <!-- Menu Body -->
               <li class="user-body">
                 <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
+                  <div class="col-xs-6 text-center">
+                    <a href="{{ route('accounts.profile') }}"><i class="fa fa-user"></i> <span>{{ __("Profile")}}</span></a>
                   </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
+                  <div class="col-xs-6 text-center">
+                    <a href="{{route('sales.main')}}"><i class="fa fa-shopping-cart"></i> <span>{{ __("Sales")}}</span></a>
+                  </div>                  
                 </div>
                 <!-- /.row -->
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{ route('accounts.profile') }}" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <form action="{{ route('logout') }}" method='post'>
@@ -209,9 +208,11 @@
       </ul>
     </li>
           <!-- Control Sidebar Toggle Button -->
+          @if(1==2)
           <li>
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
           </li>
+          @endif
         </ul>
       </div>
     </nav>

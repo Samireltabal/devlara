@@ -12,18 +12,18 @@
 <div class="col-lg-3">
     <h3>Top Product</h3>
     <table class="table table-striped table-sm table-bordered table-responsive">
-            <tbody>
+        @if($top_product)    
+        <tbody>
                 <tr>
-                    <td scope="row">Product Name</td>
-                    <td>{{ get_product_name($top_product->product_id)->name }}  </td>
-                    
+                    <td scope="row">Product Name</td>                    
+                    <td>{{ get_product_name($top_product->product_id)->name }}  </td>                                        
                 </tr>
                 <tr>
                     <td scope="row">Sales</td>
-                    <td>{{ $top_product->cnt }}</td>
-                    
+                    <td>{{ $top_product->cnt }}</td>                    
                 </tr>
             </tbody>
+            @endif
     </table>
 </div>
 <script>

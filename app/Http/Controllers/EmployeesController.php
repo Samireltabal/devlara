@@ -12,7 +12,7 @@ class EmployeesController extends Controller
     //
     public function index() {
         $shift_id = get_shift();
-        return view('admin.employees.index',compact('attendances'));
+        return view('admin.employees.index',compact('shift_id'));
     }
     public function attendance() {
         $shift = Shifts::find(get_shift());
