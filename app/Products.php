@@ -27,7 +27,8 @@ class Products extends Model
                 return $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('price') / $this->hasMany('App\Inventory','product_id')->where('type','=','2')->count();
             }
         }else{
-            return $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('price') / $this->hasMany('App\Inventory','product_id')->where('type','=','2')->count();
+            return 0;
+            // return $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('price') / $this->hasMany('App\Inventory','product_id')->where('type','=','2')->count();
         }
     }
     public function quantity_available() {
