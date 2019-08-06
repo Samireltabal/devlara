@@ -53,6 +53,7 @@ Route::group(['prefix' => '/sales', 'middleware' => ['auth']], function() {
     Route::post('/submit','InterfaceController@submit_item')->name('sales.submit');
     Route::post('/creteaInvoice','InterfaceController@create_invoice')->name('sales.createInvoice');
     Route::post('/invoiceRedirect','InterfaceController@invoice_redirect')->name('sales.invoiceRedirect');
+    Route::post('/invoice/open','ShiftsController@openInvoice')->name('invoice.reopen');
     Route::get('/id/{id}','InterfaceController@invoice')->name('invoice.ID');
     Route::get('/customersList','InterfaceController@customersAC')->name('customers.ac');
     route::get('/productAC','InterfaceController@products_list')->name('sales.products.ac');

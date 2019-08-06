@@ -45,13 +45,21 @@ $locale = get_locale();
                     </div>
                   </div>
         </div>
-        <div class="col-lg-4 hidden">
+        <div class="col-lg-4">
                 <div class="panel panel-default">
                         <div class="panel-heading">
-                          <h3 class="panel-title">Panel title</h3>
+                          <h3 class="panel-title">{{__("Open Invoice")}}</h3>
                         </div>
                         <div class="panel-body">
-                          Panel content
+                        <form id='invoiceForm' action='{{ route('invoice.reopen') }}' method='post'>
+                            <div class="form-group">
+                              @csrf
+                              <label for="sn">{{__("Invoice Number")}}</label>
+                              <input type="text" name="invoice_id" id="invoice_id" class="form-control" placeholder="Invoice Number" aria-describedby="invoice_id">
+                              <small id="sn" class="text-muted">Invoice Number</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm btn-block">Open</button>
+                        </form>
                         </div>
                       </div>
            </div>
@@ -75,7 +83,7 @@ $locale = get_locale();
                         $("#snInquiry").show('highlight',400);
                         },
                         });
-                });    
+                });   
      });
             </script>
             <script>

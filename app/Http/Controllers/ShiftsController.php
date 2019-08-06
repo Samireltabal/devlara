@@ -48,4 +48,20 @@ class ShiftsController extends Controller
         $shift->save();
         return back()->with('success','Shift Changed Successfully');
     }
+    public static function openInvoice(Request $request) {
+        $invoice_id = $request->invoice_id; 
+        $invoice = Invoices::find($invoice_id);
+        if ($invoice) {
+            if ( !$invoice->status ) {
+                $invoice->toggleStat();
+                $invoice->save();
+                return redirect()->route('sales.main')->with('success','Invoice Successfully Opened');
+            }else {
+                return redirect()->route('sales.main')->with('faild','Invoice already open');
+            }
+        }else{
+            return redirect()->route('sales.main')->with('faild','Invoice doesn`t exist');
+        }
+        
+    }
 }

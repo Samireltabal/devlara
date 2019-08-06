@@ -55,9 +55,12 @@
                 </p>
             </div> 
             <div class="col-xs-12">
-                <p><strong>Electronics Home</strong></p>
-                <p><strong>Phone :</strong> 040-22240050</p>
-                <p><strong>Address :</strong> 12 , 6th October St. Almahalla Alkubra Elgharbeya</p>
+                <p><strong>{{ env("COMPANY_NAME","PLEASE EDIT IN .env File") }}</strong> <br>
+                <strong>Phone :</strong> {{ env("COMPANY_PHONE","PLEASE EDIT IN .env File") }} <br>
+                <strong>Address :</strong> {{ env("COMPANY_ADDRESS","PLEASE EDIT IN .env File") }}<br>
+                <strong>website :</strong> {{ env("COMPANY_WEBSITE","PLEASE EDIT IN .env File") }}<br>
+                <strong>Mail :</strong> {{ env("COMPANY_EMAIL","PLEASE EDIT IN .env File") }}</p>
+                
             </div> 
          </div>
          @endif

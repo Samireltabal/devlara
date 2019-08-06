@@ -8,10 +8,10 @@
 </p>
 
 ## Current Version
+- Release : V 0.9.2B
+- Development : V 0.9.21B
 
-V 0.9.2B
-
-## Ehome Accounting System
+## Release Version Features
 - Sales System / Shifts
 - Inventories
 - Roles And Accounts
@@ -21,7 +21,16 @@ V 0.9.2B
 - Customers Data
 - Employees Data
 - Reports and Statistics 
-- Backup Generate / Download 
+- Backup Generate / Download / Delete
+
+## Development Version Features 
+ - Added .env file fields in the printable invoice 
+    COMPANY_NAME="XXXXXXXXXXXXXXXX"
+    COMPANY_ADDRESS="XXXXXXXXXXXXXX"
+    COMPANY_PHONE="XXXXXXXXXXXXXXXX"
+    COMPANY_EMAIL="XXXXXXXXXXXXXXX"
+    COMPANY_WEBSITE="XXXXXXXXXXXXXXX"
+ - Reopen invoice with it`s id , From Home page
 
 ## Known Bugs 
 - None
