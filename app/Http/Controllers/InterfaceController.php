@@ -51,8 +51,8 @@ class InterfaceController extends Controller
         $shift_id = $request->input('shift_id');
         $quantity = $request->input('product_quantity');
         $price = $request->input('product_price');
-        $discount = $request->input('discount');
-        $discounted_price = $request->input('discounted_price');
+        $request->input('discount') ? $discount = $request->input('discount') : $discount = 0 ;
+        $request->input('discounted_price') ? $discounted_price = $request->input('discounted_price') : $discounted_price = $price ;        
         $product_type = $request->input('product_type');
 
         $total = $discounted_price * $quantity ;
