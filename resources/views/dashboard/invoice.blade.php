@@ -24,43 +24,39 @@ $locale = get_locale();
             @if($invoice)
             <th>{{ __("SN") }}</th>
             @endif
-            <th>{{ __("Today Sales") }}</th>
+            <th>{{ __("Quantity") }}</th>
             <th>{{ __("Price") }}</th>
+            <th>{{ __("Discount") }}</th>
+            <th>{{ __("Item Price") }}</th>
             <th>{{ __("Total") }}</th>
+            <th>{{ __("delete") }}</th>
         </tr>
         </thead>
         <tbody>
-            @foreach($invoice_items as $key => $items)
+            {{-- {{ $invoice_items_details }} --}}
+            @foreach($invoice_items_details as $key => $items)
             @if($items->sum('quantity') < 0)
                 <tr class='bg-danger'>
             @else
                 <tr>
             @endif
-                    <th scope="row">@if(get_product_name($key))
-                        {{ get_product_name($key)->name }} 
+                    <th scope="row">@if(get_product_name($items->product_id))
+                        {{ get_product_name($items->product_id)->name }} 
                         @else
                             deleted product   
                         @endif
                     </th>
                     @if($invoice)
                     <td>
-                        @foreach($items as $item)
-                            @if($item->sn)
-                    <h4>
-                        @if($item->quantity > 0)
-                        {{ __("SN") }} : <span class='label label-primary'>{{ $item->sn }}</span>
-                        @else
-                        {{ __("SN") }} : <span class='label label-danger'>{{ $item->sn }}</span>
-                        @endif
-
-                    </h4>
-                            @endif
-                        @endforeach
+                        {{ $items->sn }}
                     </td>
                     @endif
-                    <td>{{ $items->sum('quantity') }}</td>
-                <td>{{ $items->avg('price') }} {{__("EGP")}}</td>
-                <td>{{ $items->sum('total') }} {{__("EGP")}}</td>
+                    <td>{{ $items->quantity }}</td>
+                <td>{{ $items->price }} {{__("EGP")}}</td>
+                <td>{{ $items->discount }} %</td>
+                <td>{{ $items->discounted_price }} {{__("EGP")}}</td>
+                <td>{{ $items->total }} {{__("EGP")}}</td>
+                <td><a href="{{ route('item_delete',$items->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i> {{__("delete")}}</a></td>
                 </tr>
             @endforeach
             

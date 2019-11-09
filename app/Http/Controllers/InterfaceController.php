@@ -51,9 +51,11 @@ class InterfaceController extends Controller
         $shift_id = $request->input('shift_id');
         $quantity = $request->input('product_quantity');
         $price = $request->input('product_price');
+        $discount = $request->input('discount');
+        $discounted_price = $request->input('discounted_price');
         $product_type = $request->input('product_type');
 
-        $total = $quantity * $price ;
+        $total = $discounted_price * $quantity ;
         $type = 1;
         $sn = $request->input('sn');
         $invoice_id = $request->input('invoice_id');
@@ -67,16 +69,18 @@ class InterfaceController extends Controller
         $item->sn = $sn;
         $item->type = $product_type;
         $item->quantity = $quantity;
+        $item->discount = $discount;
+        $item->discounted_price = $discounted_price;
         $item->total = $total;
         $inventory->product_id = $product_id;
         $inventory->quantity = $quantity;
-        $inventory->price = $price;
+        $inventory->price = $discounted_price;
         $inventory->total = $total;
         $inventory->shift_id = $shift_id;
         $inventory->type = 1;
         $item->save();
         $inventory->save();
-        return response('success',200);
+        return response('success',200);        
     }
     /*
     *   sales.toggle.invoice
@@ -110,32 +114,47 @@ class InterfaceController extends Controller
     public function invoice_ajax($id = '0') {
         if ($id !== '0') {
             $invoice = Invoices::find($id);
-            $invoice_items = Items::where('invoice_id','=',$invoice->id)->get();
-            $invoice_items = $invoice_items->mapToGroups(function ($item, $key) {
+            $invoice_items_details = Items::where('invoice_id','=',$invoice->id)->get();
+            $invoice_items = $invoice_items_details->mapToGroups(function ($item, $key) {
                 return [$item['product_id'] => $item];
             });
             $sum_invoice = Items::where('shift_id','=',get_shift())->where('invoice_id','=',$invoice->id)->get()->sum('total');
-            return view('dashboard.invoice')->with(compact('invoice','invoice_items','sum_invoice','id'));
+            return view('dashboard.invoice')->with(compact('invoice','invoice_items','invoice_items_details','sum_invoice','id'));
         }else {
             //$invoice_items = Items::where('shift_id','=',get_shift())->groupBy('product_id')->get(); 
-            $invoice_items = Items::where('shift_id','=',get_shift())->where('invoice_id','=','0')->get();
-            $invoice_items = $invoice_items->mapToGroups(function ($item, $key) {
+            $invoice_items_details = Items::where('shift_id','=',get_shift())->where('invoice_id','=','0')->get();
+            $invoice_items = $invoice_items_details->mapToGroups(function ($item, $key) {
                 return [$item['product_id'] => $item];
             });
             $sum_invoice = Items::where('shift_id','=',get_shift())->where('invoice_id','=','0')->get()->sum('total');
 
-            // $invoice_items = DB::table('items')
-            // ->select('product_id', 'sn', DB::raw('sum(quantity) as count') , DB::raw('sum(total) as total'))
-            // ->where('shift_id','=',get_shift())
-            // ->where('invoice_id','=','0')
-            // ->groupBy('product_id')
-            // ->get();
-
             $invoice = null;
-            return view('dashboard.invoice')->with(compact('invoice_items','invoice','sum_invoice','id'));
+            return view('dashboard.invoice')->with(compact('invoice_items','invoice_items_details', 'invoice','sum_invoice','id'));
         }
 
         
+    }
+
+    public function delete_item($item_id) {
+        $item = Items::find($item_id);
+        $invoice_id = $item->invoice_id;
+        $inventory = new Inventory;
+        $inventory->product_id = $item->product_id;
+        $inventory->quantity = $item->quantity;
+        $inventory->price = $item->discounted_price;
+        $inventory->total = $item->total;
+        $inventory->shift_id = $item->shift_id;
+        $inventory->type = 3;
+        $inventory->save();
+        $item->delete();
+        
+        if ($invoice_id == 0) { // sales.main
+            return redirect()->route('sales.main')->with('success','Item Deleted Successfully');
+        }else{
+            return redirect()->route('invoice.ID',$invoice_id)->with('success','Item Deleted Successfully');
+        }
+        
+
     }
     /*
     *   Ajax Return List Of Products ( Auto Complete )

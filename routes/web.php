@@ -51,6 +51,7 @@ Route::group(['prefix' => '/sales', 'middleware' => ['auth']], function() {
     Route::get('/','InterfaceController@index')->name('sales.main');
     Route::get('/invoice/{id}','InterfaceController@invoice_ajax')->name('sales.invoice.ajax');
     Route::post('/submit','InterfaceController@submit_item')->name('sales.submit');
+    Route::get('/delete/{id}','InterfaceController@delete_item')->name('item_delete')->middleware(['auth', 'role:admin']);
     Route::post('/creteaInvoice','InterfaceController@create_invoice')->name('sales.createInvoice');
     Route::post('/invoiceRedirect','InterfaceController@invoice_redirect')->name('sales.invoiceRedirect');
     Route::post('/invoice/open','ShiftsController@openInvoice')->name('invoice.reopen');

@@ -46,10 +46,12 @@
                 <h4>Terms and conidtions</h4>
                 <p>
                     <ul>
-                        <li>Warrany is valid if this recipt and Item box is available with it is original status</li>
-                        <li>Warranty applies against industry defects</li>
-                        <li>Warrany is not valid on Adapter , IR Lens</li>
-                        <li>We are not responsible for damages caused by the customer</li>
+                        <li>الضمان ساري المفعول إذا كان هذا الإيصال وكرتونة المنتج متاحه</li>
+                        <li>الضمان ساري ضد عيوب الصناعه</li>
+                        <li>في حالة فتح المنتج او تعديل السوفت وير او الهارد وير يعتبر المنتج خارج الضمان</li>
+                        <li>نحن لسنا مسؤولين عن الأضرار الناجمة عن العميل</li>
+                        <li>الضمان ساري لمدة سنتين من تاريخ الفاتورة على اجهزة السمارت هوم</li>
+                        <li>الضمان ساري لمدة سنه من تاريخ الفاتورة على اجهزة كاميرات المراقبة و الدي في أر</li>                        
                     </ul>
                     
                 </p>

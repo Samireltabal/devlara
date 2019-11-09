@@ -43,7 +43,7 @@
                     </td>
                     @endif
                     <td>{{ $items->sum('quantity') }}</td>
-                <td>{{ $items->avg('price') }} {{__("EGP")}}</td>
+                <td>{{ $items->avg('discounted_price') }} {{__("EGP")}}</td>
                 <td>{{ $items->sum('total') }} {{__("EGP")}}</td>
                 </tr>
             @endforeach

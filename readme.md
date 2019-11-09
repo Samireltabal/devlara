@@ -7,9 +7,16 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+## Change Log 
+   # 0.9.3B
+    - Adding Discount To Items In Sell Page
+    - Fix Print Page 
+    - Fix Inventories 
+    - Add Delete Item Button 
+
 ## Current Version
-- Release : V 0.9.2B
-- Development : V 0.9.21B
+- Release : V 0.9.3B
+- Development : V 0.9.3B
 
 ## Release Version Features
 - Sales System / Shifts

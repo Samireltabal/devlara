@@ -35,7 +35,7 @@ class Products extends Model
         $purchased = $this->hasMany('App\Inventory','product_id')->where('type','=','2')->sum('quantity');
         $returns = $this->hasMany('App\Inventory','product_id')->where('type','=','3')->sum('quantity');
         $bought = $this->hasMany('App\Inventory','product_id')->where('type','=','1')->sum('quantity');
-        return $purchased - $returns - $bought ;
+        return $purchased + $returns - $bought ;
     }
     public function Hasinventory() {
         $inventory = $this->hasMany('App\Inventory','product_id')->where('type','=','2');

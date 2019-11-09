@@ -29,6 +29,16 @@
         <input type="text" class="form-control" name="product_quantity" id="product_quantity" aria-describedby="product_quantityHelp" placeholder="Product Quantity">
         <small id="product_quantityHelp" class="form-text text-muted">{{__("Quantity")}}</small>
     </div>
+    <div class="form-group col-lg-6">
+        <label for="product_quantity">{{__("Discount")}} %</label>
+        <input type="text" class="form-control" name="discount" id="discount" aria-describedby="product_quantityHelp" placeholder="Discount %">
+        <small id="product_quantityHelp" class="form-text text-muted">{{__("Discount")}} %</small>
+    </div>
+    <div class="form-group col-lg-6">
+        <label for="product_quantity">{{__("Discounted price")}}</label>
+        <input type="text" class="form-control" name="discounted_price" id="discounted_price" aria-describedby="product_quantityHelp" placeholder="Final Price">
+        <small id="product_quantityHelp" class="form-text text-muted">{{__("Discounted price")}}</small>
+    </div>
     <div class="form-group col-lg-12">
             <label for="sn">{{__("Serial Number")}}</label>
             <input type="text" class="form-control" name="sn" id="sn" aria-describedby="snHelp" placeholder="Serial Number">
@@ -89,7 +99,28 @@
 </script>
 <script>
     // Ajax Form Submit Item 
-
+    $(function (){
+        $('#discount').on('change', function () {
+            var discount = $('#discount').val();
+            var price = $('#product_price').val();
+            console.log(discount);
+            console.log(price);
+            let discounted_price = (100 - discount) / 100 * price ;
+            console.log(discounted_price);
+            $('#discounted_price').val(discounted_price);
+        })
+    });
+    $(function (){
+        $('#discounted_price').on('change', function () {
+            var discounted_price = $('#discounted_price').val();
+            var price = $('#product_price').val();            
+            console.log(discounted_price);
+            console.log(price);
+            let discount = 100 - (discounted_price  * 100) / price ;
+            console.log(discount);
+            $('#discount').val(discount);
+        })
+    });
     $('#submitItem').on('submit', function(e) {
        e.preventDefault(); 
         var product_id = $('#product_id').val();
@@ -98,7 +129,9 @@
         var product_price = $('#product_price').val();
         var product_type = $('#product_type').val();
         var sn = $('#sn').val();
+        var discount = $('#discount').val();
         var product_quantity = $('#product_quantity').val();
+        var discounted_price = $('#discounted_price').val();
         
        $.ajax({
            type: "POST",
@@ -108,6 +141,8 @@
             "invoice_id": invoice_id,
             "product_id": product_id,
             "_token":	"{{ csrf_token() }}",
+            "discount": discount,
+            "discounted_price": discounted_price,
             "product_price": product_price,
             "product_type": product_type,
             "product_quantity": product_quantity,
