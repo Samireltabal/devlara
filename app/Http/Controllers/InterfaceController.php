@@ -191,9 +191,9 @@ class InterfaceController extends Controller
         if ($id !== '0') {
             $invoice = Invoices::find($id);
             $invoice_items = Items::where('invoice_id','=',$invoice->id)->get();
-            $invoice_items = $invoice_items->mapToGroups(function ($item, $key) {
-                return [$item['product_id'] => $item];
-            });
+            // $invoice_items = $invoice_items->mapToGroups(function ($item, $key) {
+            //     return [$item['product_id'] => $item];
+            // });
             $sum_invoice = Items::where('invoice_id','=',$invoice->id)->get()->sum('total');
             return view('dashboard.print')->with(compact('invoice','invoice_items','sum_invoice','id'));
         }else {

@@ -122,6 +122,8 @@
 	"Total Actions": "عدد الحركات",
 	"Total Payments": "إجمالي المدفوع",
 	"Inventory Purchased": "شراء بضاعه",
+	"Discount": "نسبة الخصم",
+	"Final Price": "السعر النهائي",
 	"Returns": "مرتجعات",
 	"Current shift date is obselete please Contact System Administrator": "اليوميه الحاليه غير متطابقه مع تاريخ اليوم برجاء الإتصال بمدير النظام",
 	"Return Actions": "المرتجعات",

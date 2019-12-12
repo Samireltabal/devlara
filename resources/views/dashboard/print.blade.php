@@ -1,64 +1,57 @@
 @extends('print.layout')
 @section('type')a5 @endsection
 @section('data')
-
-<table class="table table-sm table-bordered table-responsive">
+<style>
+.tableText { font-size: 0.8em; }
+</style>
+<table class="table table-sm table-bordered table-responsive ">
     <thead class="thead-default">
         <tr>
             <th>{{ __("Product Name")}}</th> 
             @if($invoice)
-            <th>{{ __("SN") }}</th>
+            <th class='hidden'>{{ __("SN") }}</th>
             @endif
             <th>{{ __("Quantity") }}</th>
             <th>{{ __("Price") }}</th>
+            <th> {{ __("Discount")}} </th>
+            <th> {{ __("Final Price")}} </th>
             <th>{{ __("Total") }}</th>
         </tr>
         </thead>
-        <tbody>
-            @foreach($invoice_items as $key => $items)
-            @if($items->sum('quantity') < 0)
-                <tr class='bg-danger'>
-            @else
-                <tr>
-            @endif
-                    <th scope="row">@if(get_product_name($key))
-                        {{ get_product_name($key)->name }} 
-                        @else
-                            deleted product   
-                        @endif
-                    </th>
-                    @if($invoice)
-                    <td>
-                        @foreach($items as $item)
-                            @if($item->sn)
-                        @if($item->quantity > 0)
-                       <span>{{ $item->sn }}</span>                            <br>
-
-                        @else
-                        <span>{{ $item->sn }}</span>                            <br>
-
-                        @endif
-                            @endif
-                        @endforeach
-                    </td>
+        <tbody class='tableText'>
+            @foreach($invoice_items as $items) 
+            <tr>                
+                <th scope="row" class='product_name'>
+                    @if(get_product_name($items->product_id))
+                        {{ get_product_name($items->product_id)->name }} 
+                    @else
+                        deleted product   
                     @endif
-                    <td>{{ $items->sum('quantity') }}</td>
-                <td>{{ $items->avg('discounted_price') }} {{__("EGP")}}</td>
-                <td>{{ $items->sum('total') }} {{__("EGP")}}</td>
+                </th>
+                @if($invoice)
+                    <td class='hidden'>
+                        <span>{{ $items->sn }}</span>
+                    </td>                    
+                @endif    
+                <td>{{ $items->quantity }}</td>
+                <td>{{ $items->price }}</td>
+                <td>{{ $items->discount }} </td>
+                <td>{{ $items->discounted_price }} {{__("EGP")}}</td>
+                <td>{{ $items->total }} {{__("EGP")}}</td>
                 </tr>
             @endforeach
             
-        </tbody>
+        </tbody> 
         <tfoot>
             <tr>
                 @if($invoice)
-                    <th colspan="4">{{__("Total")}} : </th>
-                    <td colspan="1">{{ $sum_invoice }} {{__("EGP")}}</td>
+                    <th colspan="5">{{__("Total")}} : </th>
+                    <td colspan="2">{{ $sum_invoice }} {{__("EGP")}}</td>
                 @else
-                    <th colspan="3">{{__("Total")}} : </th>
-                    <td colspan="1">{{ $sum_invoice }} {{__("EGP")}}</td>
+                    <th colspan="5">{{__("Total")}} : </th>
+                    <td colspan="2">{{ $sum_invoice }} {{__("EGP")}}</td>
                 @endif
-            </tr>
+            </tr>            
         </tfoot>
 </table>
 
