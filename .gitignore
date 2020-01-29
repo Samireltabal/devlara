@@ -6,6 +6,8 @@ app/Http/Controllers/itemInstaller2.php
 app/Http/Controllers/itemInstaller3.php
 /public/storage
 /storage/*.key
+public/.well-known/
+app_syncit_services/
 /vendor
 /.idea
 /.vscode

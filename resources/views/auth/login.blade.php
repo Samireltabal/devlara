@@ -46,8 +46,10 @@
             </div>
     </form>
     <a href="{{ route('password.request') }}">{{ __('custom.passwordRestore') }}</a>
+    
   </div>
   <!-- /.login-box-body -->
+  
 </div>
 <!-- /.login-box -->
 <script src="{{ asset('admin/app.js') }}"></script>
